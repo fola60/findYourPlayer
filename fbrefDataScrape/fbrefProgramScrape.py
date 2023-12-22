@@ -7,9 +7,15 @@ from csv import writer
 
 shooting_html = requests.get('https://fbref.com/en/comps/Big5/shooting/players/Big-5-European-Leagues-Stats').text
 passing_html = requests.get('https://fbref.com/en/comps/Big5/passing/players/Big-5-European-Leagues-Stats').text
+defence_html = requests.get('https://fbref.com/en/comps/Big5/defense/players/Big-5-European-Leagues-Stats').text
+shotCreation_html = requests.get('https://fbref.com/en/comps/Big5/gca/players/Big-5-European-Leagues-Stats').text
+possesion_html = requests.get('https://fbref.com/en/comps/Big5/possession/players/Big-5-European-Leagues-Stats').text
 
 shooting = BeautifulSoup(shooting_html, 'lxml')
 passing = BeautifulSoup(passing_html,'lxml')
+defence = BeautifulSoup(defence_html,'lxml')
+shotCreation = BeautifulSoup(shotCreation_html,'lxml')
+possesion = BeautifulSoup(possesion_html,'lxml')
 
 #Defining arrays of unscraped info
 players = shooting.find_all('td', attrs={'data-stat': 'player'})
@@ -63,15 +69,64 @@ passesPenArea = passing.find_all('td', attrs={'data-stat' : 'passes_into_penalty
 crossesPenArea = passing.find_all('td', attrs={'data-stat' : 'crosses_into_penalty_area'})
 progressivePasses = passing.find_all('td', attrs={'data-stat' : 'progressive_passes'})
 
+tackles = defence.find_all('td', attrs={'data-stat' : 'tackles'})
+tacklesTurnOver = defence.find_all('td', attrs={'data-stat' : 'tackles_won'})
+tacklesDef3rd = defence.find_all('td', attrs={'data-stat' : 'tackles_def_3rd'})
+tacklesMid3rd = defence.find_all('td', attrs={'data-stat' : 'tackles_mid_3rd'})
+tacklesAtt3rd = defence.find_all('td', attrs={'data-stat' : 'tackles_att_3rd'})
+dribblersTackled = defence.find_all('td', attrs={'data-stat' : 'challenge_tackles'})
+dribblesChallenged = defence.find_all('td', attrs={'data-stat' : 'challenges'})
+dribblersTackledPCT = defence.find_all('td', attrs={'data-stat' : 'challenge_tackles_pct'})
+challengesLost = defence.find_all('td', attrs={'data-stat' : 'challenges_lost'})
+blocks = defence.find_all('td', attrs={'data-stat' :'blocks'})
+shotsBlocked = defence.find_all('td', attrs={'data-stat' : 'blocked_shots'})
+passesBlocked = defence.find_all('td', attrs={'data-stat' : 'blocked_passes'})
+interceptions = defence.find_all('td', attrs={'data-stat' : 'interceptions'})
+clearances = defence.find_all('td', attrs={'data-stat' : 'clearances'})
+
+scaS = shotCreation.find_all('td', attrs={'data-stat' : 'sca'})
+scaSP90 = shotCreation.find_all('td', attrs={'data-stat' : 'sca_per90'})
+scaSPassLive = shotCreation.find_all('td', attrs={'data-stat' : 'sca_passes_live'})
+scaSPassDead = shotCreation.find_all('td', attrs={'data-stat' : 'sca_passes_dead'})
+scaSTakeOn = shotCreation.find_all('td', attrs={'data-stat' : 'sca_take_ons'})
+scaSShot = shotCreation.find_all('td', attrs={'data-stat' : 'sca_shots'})
+scaSFoulsDrawn = shotCreation.find_all('td', attrs={'data-stat' : 'sca_fouled'})
+scaSDefence = shotCreation.find_all('td', attrs={'data-stat' : 'sca_defense'})
+gcaS = shotCreation.find_all('td', attrs={'data-stat' : 'gca'})
+gcaSPer90 = shotCreation.find_all('td', attrs={'data-stat' : 'gca_per90'})
+gcaSTakeOn = shotCreation.find_all('td', attrs={'data-stat' : 'gca_take_ons'})
+
+touches = possesion.find_all('td', attrs={'data-stat' :'touches'})
+touchesDefPenArea = possesion.find_all('td', attrs={'data-stat' :'touches_def_pen_area'})
+touchesDef3rd = possesion.find_all('td', attrs={'data-stat':'touches_def_3rd'})
+touchesMid3rd = possesion.find_all('td', attrs={'data-stat':'touches_mid_3rd'})
+touchesAtt3rd = possesion.find_all('td', attrs={'data-stat':'touches_att_3rd'})
+touchesAttPenArea = possesion.find_all('td', attrs={'data-stat':'touches_att_pen_area'})
+takeOnsAttempted = possesion.find_all('td', attrs={'data-stat':'take_ons'})
+takeOnsSuccesful = possesion.find_all('td', attrs={'data-stat':'take_ons_won'})
+takeOnsSuccesfulPCT = possesion.find_all('td', attrs={'data-stat':'take_ons_won_pct'})
+takeOnsTackled = possesion.find_all('td', attrs={'data-stat':'take_ons_tackled'})
+takeOnsTackledPCT = possesion.find_all('td', attrs={'data-stat':'take_ons_tackled_pct'})
+carries = possesion.find_all('td', attrs={'data-stat':'carries'})
+carriesDis = possesion.find_all('td', attrs={'data-stat':'carries_distance'})
+progressiveCarryingDis = possesion.find_all('td', attrs={'data-stat':'carries_progressive_distance'})
+progressiveCarries = possesion.find_all('td', attrs={'data-stat':'progressive_carries'})
+carriesFinal3rd = possesion.find_all('td', attrs={'data-stat':'carries_into_final_third'})
+carriesIntoPen = possesion.find_all('td', attrs={'data-stat':'carries_into_penalty_area'})
+miscontrolls = possesion.find_all('td', attrs={'data-stat':'miscontrols'})
+dispossessed = possesion.find_all('td', attrs={'data-stat':'dispossessed'})
+passesReceived = possesion.find_all('td', attrs={'data-stat':'passes_received'})
+progPassesReceived = possesion.find_all('td', attrs={'data-stat':'progressive_passes_received'})
 
 
 #Creating csv for player Data
 with open('playerData.csv', 'w', newline='', encoding = 'utf8') as f:
     theWriter = writer(f)
-    header = ['Index', 'PlayerName', 'Nation', 'position', 'Squad', 'Competition', 'Age', 'BirthYear', 'Full90s Played', 'Goals-Scored', 'Total-Shots', 'Shots-on-Target', 'Shots-on-Target%', 'Shots-Per90', 'Shots-on-TargetP90', 'GoalsPerShot', 'G/SOT', 'Average-shot-Distance', 'Shots-from-free-kicks', 'Penalties-created', 'Penalties-attempted', 'xG', 'npxg', 'npxG/Sh', 'G-xG', 'npG-npxG','completed-passes','pass-attempted','pass-completion%','total-pass-distance','progPass-distance','short-pass-completed','short-pass-attempted','short-completion%','medium-pass-completed','medium-pass-attempted','medium-completion%','long-pass-completed','long-pass-attempted','long-completion%','assists','xAg','a-xAg','keypasses','final3rdpasses','passPenArea','crossPenArea','progressivePasses']#Definng header
-    theWriter.writerow(header)
+    #header = ['Index', 'PlayerName', 'Nation', 'position', 'Squad', 'Competition', 'Age', 'BirthYear', 'Full90s Played', 'Goals-Scored', 'Total-Shots', 'Shots-on-Target', 'Shots-on-Target%', 'Shots-Per90', 'Shots-on-TargetP90', 'GoalsPerShot', 'G/SOT', 'Average-shot-Distance', 'Shots-from-free-kicks', 'Penalties-created', 'Penalties-attempted', 'xG', 'npxg', 'npxG/Sh', 'G-xG', 'npG-npxG','completed-passes','pass-attempted','pass-completion%','total-pass-distance','progPass-distance','short-pass-completed','short-pass-attempted','short-completion%','medium-pass-completed','medium-pass-attempted','medium-completion%','long-pass-completed','long-pass-attempted','long-completion%','assists','xAg','a-xAg','keypasses','final3rdpasses','passPenArea','crossPenArea','progressivePasses','tackle','tackleTurnOver','tackleDef3rd','tackleMid3rd','tackleAtt3rd','dribblerTackled','dribblersChallenged','dribblersTackled%','challengesLost','blocks','shotsblocked','passesBlocked','interception','clearances']#Definng header
+    #theWriter.writerow(header)
     
     for i,player in enumerate(place):#Sorting through every player and putting info into csv
+        print(i)
         index = place[i].get_text()
         playerN = players[i].find('a',).text
         if nationalities[i].find('span',attrs={"class style": None}) == None:
@@ -82,7 +137,12 @@ with open('playerData.csv', 'w', newline='', encoding = 'utf8') as f:
         team = teams[i].find('a',).get_text()
         competition = competitions[i].find('a',).get_text()
         age = ages[i].get_text()
-        birthYear = birthYears[i].get_text()
+
+        if birthYears[i].get_text() == '':
+            birthYear = 0
+        else:
+            birthYear = float(birthYears[i].get_text())
+
         ninetyPlayed = float(ninetiesPlayed[i].get_text())
         goalScored = float(goalsScored[i].get_text())
         totalShot = float(totalShots[i].get_text())
@@ -95,7 +155,7 @@ with open('playerData.csv', 'w', newline='', encoding = 'utf8') as f:
         shotsPerNinety = float(shotsPerNineties[i].get_text())
         shotOnTargetPerNin = float(shotsOnTargetPerNin[i].get_text())
 
-        if goalsPerShot[i].get_text() == '':
+        if goalsPerShot[i].get_text() == '' :
             goalPerShot = 0.00
         else:
             goalPerShot = float(goalsPerShot[i].get_text())
@@ -225,6 +285,11 @@ with open('playerData.csv', 'w', newline='', encoding = 'utf8') as f:
         else:
             xAg = float(xAgs[i].get_text())
 
+        if xAs[i].get_text() == '':
+            xA = 0.0
+        else:
+            xA = float(xAs[i].get_text())
+
         if aMinusXags[i].get_text() == '':
             aMinusXag = 0.0
         else:
@@ -255,5 +320,238 @@ with open('playerData.csv', 'w', newline='', encoding = 'utf8') as f:
         else:
             progressivePass = float(progressivePasses[i].get_text())  
 
-        statlist = [index, playerN, nationality, position, team, competition, age, birthYear, ninetyPlayed, goalScored, totalShot, shotOnTarget, shotOnTargetPct, shotsPerNinety, shotOnTargetPerNin, goalPerShot, goalPerShotOnTarget, averageShotDistance, shotFromFk, penaltyKickMade, penaltyAttempt, xg, npxg, npxgPerShot, gMinusXg, gMinusNpxg,completedPass,passAttempted,passCompletionPCT,totpassDis,progPassDis,shortComPass,shortAttPass,shortComPCT,mediumComPass,mediumAttPass,mediumComPCT,longComPass,longAttPass,longComPCT,assist,xAg,aMinusXag,keyPass,final3rdPass,passPenArea,crossPenArea,progressivePass]
+        if tackles[i].get_text() == '':
+            tackle = 0.0
+        else:
+            tackle = float(tackles[i].get_text())
+        
+        if tacklesTurnOver[i].get_text() == '':
+            tackleTurnOver = 0.0
+        else:
+            tackleTurnOver = float(tacklesTurnOver[i].get_text())
+
+        if tacklesDef3rd[i].get_text() == '':
+            tackleDef3rd = 0.0
+        else:
+            tackleDef3rd = float(tacklesDef3rd[i].get_text())
+        
+        if tacklesMid3rd[i].get_text() == '':
+            tackleMid3rd = 0.0
+        else:
+            tackleMid3rd = float(tacklesMid3rd[i].get_text())
+
+        if tacklesAtt3rd[i].get_text() == '':
+            tackleAtt3rd = 0.0
+        else:
+            tackleAtt3rd = float(tacklesAtt3rd[i].get_text())
+
+        if dribblersTackled[i].get_text() == '':
+            dribblerTackled = 0.0
+        else:
+            dribblerTackled = float(dribblersTackled[i].get_text())
+
+        if dribblesChallenged[i].get_text() == '':
+            dribbleChallenged = 0.0
+        else:
+            dribbleChallenged = float(dribblesChallenged[i].get_text())
+
+        if dribblersTackledPCT[i].get_text() == '':
+            dribblerTackledPCT = 0.0
+        else:
+            dribblerTackledPCT = float(dribblersTackledPCT[i].get_text())
+
+        if challengesLost[i].get_text() == '':
+            challengeLost = 0.0
+        else:
+            challengeLost = float(challengesLost[i].get_text())
+
+        if blocks[i].get_text() == '':
+            block = 0.0
+        else:
+            block = float(blocks[i].get_text())
+
+        if shotsBlocked[i].get_text() == '':
+            shotBlocked = 0.0
+        else:
+            shotBlocked = float(shotsBlocked[i].get_text())
+
+        if passesBlocked[i].get_text() == '':
+            passBlocked = 0.0
+        else:
+            passBlocked = float(passesBlocked[i].get_text())
+
+        if interceptions[i].get_text() == '':
+            interception = 0.0
+        else:
+            interception = float(interceptions[i].get_text())
+
+        if clearances[i].get_text() == '':
+            clearnce = 0.0
+        else:
+            clearance = float(clearances[i].get_text())
+
+        if scaS[i].get_text() == '':
+            sca = 0.0
+        else:
+            sca = float(scaS[i].get_text())
+        
+        if scaSP90[i].get_text() == '':
+            scaP90 = 0.0
+        else:
+            scaP90 = float(scaSP90[i].get_text())
+
+        if scaSPassLive[i].get_text() == '':
+            scaPassLive = 0.0
+        else:
+            scaPassLive = float(scaSPassLive[i].get_text())
+
+        if scaSPassDead[i].get_text() == '':
+            scaPassDead = 0.0
+        else:
+            scaPassDead = float(scaSPassDead[i].get_text())
+
+        if scaSTakeOn[i].get_text() == '':
+            scaTakeOn = 0.0
+        else:
+            scaTakeOn = float(scaSTakeOn[i].get_text())
+        
+        if scaSShot[i].get_text() == '':
+            scaShot = 0.0
+        else:
+            scaShot = float(scaSShot[i].get_text())
+
+        if scaSFoulsDrawn[i].get_text() == '':
+            scaFoulDrawn = 0.0
+        else:
+            scaFoulDrawn = float(scaSFoulsDrawn[i].get_text())
+
+        if scaSDefence[i].get_text() == '':
+            scaDefence = 0.0
+        else:
+            scaDefence = float(scaSDefence[i].get_text())
+
+        if gcaS[i].get_text() == '':
+            gca = 0.0
+        else:
+            gca = float(gcaS[i].get_text())
+
+        if gcaSPer90[i].get_text() == '':
+            gcaPer90 = 0.0
+        else:
+            gcaPer90 = float(gcaSPer90[i].get_text())
+
+        if gcaSTakeOn[i].get_text() == '':
+            gcaTakeOn = 0.0
+        else:
+            gcaTakeOn = float(gcaSTakeOn[i].get_text())
+
+        if touches[i].get_text() == '':
+            touch = 0.0
+        else:
+            touch = float(touches[i].get_text())
+
+        if touchesDefPenArea[i].get_text() == '':
+            touchDefPenArea = 0.0
+        else:
+            touchDefPenArea = float(touchesDefPenArea[i].get_text())
+
+        if touchesDef3rd[i].get_text() == '':
+            touchDef3rd = 0.0
+        else:
+            touchDef3rd = float(touchesDef3rd[i].get_text())
+
+        if touchesMid3rd[i].get_text() == '':
+            touchMid3rd = 0.0
+        else:
+            touchMid3rd = float(touchesMid3rd[i].get_text())
+
+        if touchesAtt3rd[i].get_text() == '':
+            touchAtt3rd = 0.0
+        else:
+            touchAtt3rd = float(touchesAtt3rd[i].get_text())
+
+        if touchesAttPenArea[i].get_text() == '':
+            touchAttPenArea = 0.0
+        else:
+            touchAttPenArea = float(touchesAttPenArea[i].get_text())
+
+        if takeOnsAttempted[i].get_text() == '':
+            takeOnAttempted = 0.0
+        else:
+            takeOnAttempted = float(takeOnsAttempted[i].get_text())
+
+        if takeOnsSuccesful[i].get_text() == '':
+            takeOnSuccesful = 0.0
+        else:
+            takeOnSuccesful = float(takeOnsSuccesful[i].get_text())
+
+        if takeOnsSuccesfulPCT[i].get_text() == '':
+            takeOnSuccesfulPCT = 0.0
+        else:
+            takeOnSuccesfulPCT = float(takeOnsSuccesfulPCT[i].get_text())
+
+        if takeOnsTackled[i].get_text() == '':
+            takeOnTackled = 0.0
+        else:
+            takeOnTackled = float(takeOnsTackled[i].get_text())
+
+        if takeOnsTackledPCT[i].get_text() == '':
+            takeOnTackledPCT = 0.0
+        else:
+            takeOnTackledPCT = float(takeOnsTackledPCT[i].get_text())
+
+        if carries[i].get_text() == '':
+            carry = 0.0
+        else:
+            carry = float(carries[i].get_text())
+
+        if carriesDis[i].get_text() == '':
+            carryDis = 0.0
+        else:
+            carryDis = float(carriesDis[i].get_text())
+
+        if progressiveCarryingDis[i].get_text() == '':
+            progressiveCarryDis = 0.0
+        else:
+            progressiveCarryDis = float(progressiveCarryingDis[i].get_text())
+
+        if progressiveCarries[i].get_text() == '':
+            progressiveCarry = 0.0
+        else:
+            progressiveCarry = float(progressiveCarries[i].get_text())
+
+        if carriesFinal3rd[i].get_text() == '':
+            carryFinal3rd = 0.0
+        else:
+            carryFinal3rd = float(carriesFinal3rd[i].get_text())
+
+        if carriesIntoPen[i].get_text() == '':
+            carryIntoPen = 0.0
+        else:
+            carryIntoPen = float(carriesIntoPen[i].get_text())
+
+        if miscontrolls[i].get_text() == '':
+            miscontrol = 0.0
+        else:
+            miscontrol = float(miscontrolls[i].get_text())
+        
+        if dispossessed[i].get_text() == '':
+            dispos = 0.0
+        else:
+            dispos = float(dispossessed[i].get_text())
+        
+        if passesReceived[i].get_text() == '':
+            passReceived = 0.0
+        else:
+            passReceived = float(passesReceived[i].get_text())
+
+        if progPassesReceived[i].get_text() == '':
+            progPassReceived = 0.0
+        else:
+            progPassReceived = float(progPassesReceived[i].get_text())
+        
+
+
+        statlist = [playerN, nationality, position, team, competition, age, birthYear, ninetyPlayed, goalScored, totalShot, shotOnTarget, shotOnTargetPct, shotsPerNinety, shotOnTargetPerNin, goalPerShot, goalPerShotOnTarget, averageShotDistance, shotFromFk, penaltyKickMade, penaltyAttempt, xg, npxg, npxgPerShot, gMinusXg, gMinusNpxg,completedPass,passAttempted,passCompletionPCT,totpassDis,progPassDis,shortComPass,shortAttPass,shortComPCT,mediumComPass,mediumAttPass,mediumComPCT,longComPass,longAttPass,longComPCT,assist,xAg,xA,aMinusXag,keyPass,final3rdPass,passPenArea,crossPenArea,progressivePass,tackle,tackleTurnOver,tackleDef3rd,tackleMid3rd,tackleAtt3rd,dribblerTackled,dribbleChallenged,dribblerTackledPCT,challengeLost,block,shotBlocked,passBlocked,interception,clearance,sca,scaP90,scaPassLive,scaPassDead,scaTakeOn,scaShot,scaFoulDrawn,scaDefence,gca,gcaPer90,gcaTakeOn,touch,touchDefPenArea,touchDef3rd,touchMid3rd,touchAtt3rd,touchAttPenArea,takeOnAttempted,takeOnSuccesful,takeOnSuccesfulPCT,takeOnTackledPCT,carry,carryDis,progressiveCarryDis,progressiveCarry,carryFinal3rd,carryIntoPen,miscontrol,dispos,passReceived,progPassReceived]
         theWriter.writerow(statlist)
+print("I cant believe that we made it this far")
