@@ -7,9 +7,15 @@ const client = new Client({
     password:"sarah2014",
     database: "top5playerdata"
 })
-
+const test = new Client({
+    host: "localhost",
+    user: "postgres",
+    port: 5432,
+    password:"sarah2014",
+    database: "test"
+})
 client.connect();
-
+test.connect();
 client.query(`SELECT * FROM playerdata`,(err, res)=>{
     // if(!err){
     //     console.log(res.rows);
