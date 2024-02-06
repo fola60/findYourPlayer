@@ -1,6 +1,32 @@
 const express = require('express')
 const app = express();
 const pool = require("./dataBase")
+const http = require("http")
+const { Server } = require("socket.io")
+const cors = require("cors")
+
+app.use(cors());
+const serverS = http.createServer(app);
+
+const io = new Server(serverS, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    }
+});
+
+io.on("connection", (socket) => {
+    console.log(`User connected: ${socket.id}`);
+
+    socket.on("send_id", (data) => {
+        socket.broadcast.emit("receive_id", data)
+        console.log("received id : " + data.id)
+    })
+})
+
+serverS.listen(3500, () => {
+    console.log("socket started on port 3500")
+});
 
 app.use(express.json())
 
@@ -307,6 +333,37 @@ app.get("/allValue/pos/df/league/laliga", async (req,res) => {
     }
 });
 
+app.get("/allValue/search", async (req,res) => {
+    try{
+    const names = await pool.query(`
+        SELECT player,id,pos,born,comp
+        FROM playerdata WHERE pos != 'GK'; 
+    `)
+    res.json(names.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.post("/receiveId", async (req,res) => {
+    try {
+        const id = req.body.res;
+        const pushId = await pool.query(`UPDATE dataid SET id = ${id};`)
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
+app.get("/getId", async (req,res) => {
+    try {
+        const id = await pool.query(`SELECT id FROM dataid;`);
+        res.json(id.rows)
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
 app.listen(5000, () =>{
     console.log("Server started on port 5000")
 });
+

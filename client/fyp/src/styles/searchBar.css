@@ -1,0 +1,98 @@
+.search-bar-container {
+    padding-top:3vh;
+    width:40%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+  }
+
+.input-wrapper{
+    display: flex;
+    flex-direction: row;
+    background:transparent;
+    width:100%;
+    height:2.5rem;
+    border-radius: 10px;
+    border:2px solid #A4B3B6;
+    padding: 0 15px;
+    align-items: center;
+    
+}
+
+input {
+    background: transparent;
+    border-radius: 10px;
+    height:100%;
+    font-size: 1.25rem;
+    width:100%;
+    margin-left: 5px;
+    border: none;
+    color:white;
+}
+
+input:focus {
+    outline:none;
+    color:white;
+}
+
+#search-icon {
+    height:20px;
+    width:auto;
+    color:#B93DAF;
+}
+
+#search-results {
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    height:auto;
+    max-height: 10rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border-radius: 10px;
+    font-size: 1.25rem;
+    margin-left: 5px;
+    border: none;
+    color:white;
+    flex-shrink: 0;
+}
+
+.results {
+    padding:0.75rem;
+    display: flex;
+    flex-direction: row;
+    margin:0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    gap:0px;
+}
+
+::-webkit-scrollbar {
+    background-color: #2A1B3D;
+    border-radius:6px ;
+    width:0.5rem;
+}
+
+.linkTo{
+    height:45px;
+    padding:0.75rem;
+    
+}
+
+.Link{
+    text-decoration: none;
+    color:white;
+}
+
+.Link:hover{
+    color:red;
+    font-size: 120%;
+}
+
+.logo-fyp{
+    height:30px;
+    padding:3px;
+}
+

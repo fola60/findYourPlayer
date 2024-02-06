@@ -1,0 +1,52 @@
+:root{
+    --dark-pink:#D83F87;
+    /* Three primary*/
+    --dark-purple:#2A1B3D;
+    --purple: #B93DAF;
+    --red: #D43725;
+    /**/
+    --light-purple: #E98074;
+    --cloudy-green: #A4B3B6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width:100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom right,var(--dark-purple),var(--purple));
+
+}
+
+
+.container {
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items:center
+}
+
+.search-bar-container {
+    margin-top: 1rem;
+    padding-top:3vh;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
+  }
+
+.logo-fyp{
+    height:30px;
+    padding:3px;
+   
+}
+
+.logo{
+    height:500px;
+    width:550px;
+}
