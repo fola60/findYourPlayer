@@ -1,0 +1,63 @@
+:root{
+    --dark-pink:#D83F87;
+    /* Three primary*/
+    --dark-purple:#2A1B3D;
+    --purple: #B93DAF;
+    --red: #D43725;
+    /**/
+    --light-purple: #E98074;
+    --cloudy-green: #A4B3B6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width:100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom right,var(--dark-purple),var(--purple));
+
+}
+
+.rank-container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height: 20%;
+}
+
+.data{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height:80%;
+}
+.player-ranked-container{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height:100%;
+    overflow-x: scroll;
+
+}
+.player-stats{
+    display: flex;
+    flex-direction:row ;
+    max-height: 30px;
+    width:100%;
+    
+}
+
+.number{
+    height:5px;
+    width:5px;
+}

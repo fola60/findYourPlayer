@@ -28,6 +28,7 @@ export default function Charts(props){
     const [loaded,setLoaded] = useState(0);
     const [name,setName] = useState("Player 1");
     const [charts,setCharts] = useState(<></>);
+    /*
     const [paChartData,setPaChartData] = useState({
         labels: ['Completed passes ', 'Short Completed pass ', 'Medium Completed pass  ', 'Long Completed pass ', 'Passes Received', 'Progressive Passes Received', 'Key Passes'],
         datasets: [
@@ -47,6 +48,7 @@ export default function Charts(props){
             }
         ]
     });
+    */
     const [playerData,setPlayerData] = useState({
         labels:['Passing','Shooting','Defending','Press Resistance', 'dribbling'],
         datasets: [
@@ -78,20 +80,20 @@ export default function Charts(props){
             }
         }
     }
-    const optionsPolar = {
-        type: 'polarArea',
-        data: data,
-        options: {
+    // const optionsPolar = {
+    //     type: 'polarArea',
+    //     data: data,
+    //     options: {
 
-        },
-        scales: {
-            r:{
-                suggestedMin: 0,
-                suggestedMax: 100
-            }
-        }
+    //     },
+    //     scales: {
+    //         r:{
+    //             suggestedMin: 0,
+    //             suggestedMax: 100
+    //         }
+    //     }
         
-    }
+    // }
     useEffect(() => {
         setData(props.data)
         setUpdate(Math.random())
@@ -165,9 +167,7 @@ export default function Charts(props){
                 options= {options}
                 />
             </div>
-            <div className='Polor-Area-Container'>
-                <PolarArea />
-            </div>            
+                      
         </>
     )
 }

@@ -16,12 +16,46 @@ const io = new Server(serverS, {
 });
 
 io.on("connection", (socket) => {
-    console.log(`User connected: ${socket.id}`);
-
+    let dataPoints;
     socket.on("send_id", (data) => {
-        socket.broadcast.emit("receive_id", data)
-        console.log("received id : " + data.id)
-    })
+        socket.broadcast.emit("receive_id", data);
+        console.log("received id : " + data.id);
+    });
+    socket.on("send_league", (data) => { 
+        if (data == 1){
+            data = "prem";
+        } else if(data == 2){
+            data = "bundesliga";
+        } else if(data == 3){
+            data = "ligue1";
+        } else if(data == 4){
+            data = "seriea";
+        } else if(data == 5){
+            data = "laliga";
+        } else {
+            data = "prem"
+        }
+        
+        socket.broadcast.emit("received_league", data);
+        console.log("received league : " + data);
+    });
+    socket.on("send_position", (data) => {
+        socket.broadcast.emit("received_position", data);
+        console.log("received position", data);
+    });
+    socket.on("send_data_points",(data) => {
+        socket.broadcast.emit("receive_data_points",data);
+        dataPoints = data;
+        console.log("received data points! :", dataPoints);
+    });
+    socket.on("send_player_data",(data) =>{
+        for (let i = 0;i < data.length; i++){
+            data[i].score = (data[i].mf_hvp * dataPoints.hvp) + (data[i].mf_da * dataPoints.da) + (data[i].mf_ca * dataPoints.ca) + (data[i].mf_gs * dataPoints.gs) + (data[i].mf_br  * dataPoints.br);
+        }
+        data.sort((a,b) => b.score - a.score);
+        socket.broadcast.emit("receive_sorted_player", data.slice(0,50));
+        console.log(data);
+    });
 })
 
 serverS.listen(3500, () => {

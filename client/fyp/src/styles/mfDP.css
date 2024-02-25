@@ -1,0 +1,34 @@
+:root{
+    --dark-pink:#D83F87;
+    /* Three primary*/
+    --dark-purple:#2A1B3D;
+    --purple: #B93DAF;
+    --red: #D43725;
+    /**/
+    --light-purple: #E98074;
+    --cloudy-green: #A4B3B6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width:100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom right,var(--dark-purple),var(--purple));
+
+}
+
+.container-data-points{
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.data-points{
+    width:100px;
+}
