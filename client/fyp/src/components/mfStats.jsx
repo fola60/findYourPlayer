@@ -13,13 +13,15 @@ export default function MfStats(){
     const [da,setDa] = useState(0);
     const [ca,setCa] = useState(0);
     const [gs,setGs] = useState(0);
-    const [br,setBr] = useState(0);
+    const [passv,setpassv] = useState(0);
+    
 
     const [hvpDp,setHvpDp] = useState([]);
     const [daDp,setDaDp] = useState([]);
     const [caDp,setCaDp] = useState([]);
     const [gsDp,setGsDp] = useState([]);
-    const [brDp,setBrDp] = useState([]);
+    const [passvDp,setpassvDp] = useState([]);
+    
     
     const [players,setPlayers] = useState(null);
     const [bar,setBar] = useState([<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,]);
@@ -32,7 +34,7 @@ export default function MfStats(){
         setDaDp([]);
         setCaDp([]);
         setGsDp([]);
-        setBrDp([]);
+        setpassvDp([]);
 
         let bars = [];
         for(let i = 0;i < dataPoints;i++){
@@ -64,11 +66,14 @@ export default function MfStats(){
         }
         setGsDp(barsGs);
 
-        let barsBr = [];
-        for(let i = 0;i < br;i++){
-            barsBr.push(<div className='bar'></div>)
+        let barspassv = [];
+        for(let i = 0;i < passv;i++){
+            barspassv.push(<div className='bar'></div>)
         }
-        setBrDp(barsBr);
+        setpassvDp(barspassv);
+
+        
+
      },[dataPoints]);
 
     useEffect(() => {
@@ -82,30 +87,77 @@ export default function MfStats(){
     },[players]);
 
 
-    function updateHvp(){
-        setHvp(hvp + 1);
-        setDataPoints(dataPoints - 1);
-        
+    function incrementHvp(){
+        if(dataPoints > 0){
+            setHvp(hvp + 1);
+            setDataPoints(dataPoints - 1);
+        }
     }
-    function updateDa(){
-        setDa(da + 1);
-        setDataPoints(dataPoints - 1);
+    function decrementHvp(){
+        if(hvp > 0) {
+            setHvp(hvp -1);
+            setDataPoints(dataPoints + 1);
+        }
     }
-    function updateCa(){
-        setCa(ca + 1);
-        setDataPoints(dataPoints - 1);
+
+    function incrementDa(){
+        if(dataPoints > 0){
+            setDa(da + 1);
+            setDataPoints(dataPoints - 1);
+        }
     }
-    function updateGs(){
-        setGs(gs + 1);
-        setDataPoints(dataPoints - 1);
+
+    function decrementDa(){
+        if(da > 0) {
+            setDa(da -1);
+            setDataPoints(dataPoints + 1);
+        }
     }
-    function updateBr(){
-        setBr(br + 1);
-        setDataPoints(dataPoints - 1);
+
+    function incrementCa(){
+        if(dataPoints > 0){
+            setCa(ca + 1);
+            setDataPoints(dataPoints - 1);
+        }
     }
+    function decrementCa(){
+        if(ca > 0) {
+            setCa(ca -1);
+            setDataPoints(dataPoints + 1);
+        }
+    }
+
+    function incrementGs(){
+        if(dataPoints > 0){
+            setGs(gs + 1);
+            setDataPoints(dataPoints - 1);
+        }
+    }
+    function decrementGs(){
+        if(gs > 0) {
+            setGs(gs -1);
+            setDataPoints(dataPoints + 1);
+        }
+    }
+
+    function incrementpassv(){
+        if(dataPoints > 0){
+            setpassv(passv + 1);
+            setDataPoints(dataPoints - 1);
+        }
+    }
+    function decrementpassv(){
+        if(passv > 0) {
+            setpassv(passv -1);
+            setDataPoints(dataPoints + 1);
+        }
+    }
+    
+
+
     function sendData(){
         if (dataPoints <= 0){
-            socket.emit("send_data_points",{hvp:hvp,da:da,ca:ca,gs:gs,br:br})
+            socket.emit("send_data_points",{hvp:hvp,da:da,ca:ca,gs:gs,passv:passv})
         }
         socket.on("receive_players", (data) => {
             setPlayers(data);
@@ -121,44 +173,54 @@ export default function MfStats(){
             <div className="header-mf">Assign Points to Categories You Want Your Player to posses.</div>
             <div className="container-data-points">
                     <div className="category-container">
-                        <div className="data-points" onClick={updateHvp}>
+                        <div className="data-points" >
                             <div className="info">High Volume passing</div>
                             <div className="bars">{hvpDp}</div>
                         </div>
-                        <div className="btn Plus"></div>
-                        <div className="btn Min"></div>
+                        <div className="buttons">
+                            <div className="btn Plus" onClick={incrementHvp}>+</div>
+                            <div className="btn Min" onClick={decrementHvp}>-</div>
+                        </div>
                     </div>
                     <div className="category-container">
-                        <div className="data-points" onClick={updateDa}>
+                        <div className="data-points" >
                             <div className="info">Defensive Ability</div>
                             <div className="bars">{daDp}</div>
                         </div>
-                        <div className="btn Plus"></div>
-                        <div className="btn Min"></div>
+                        <div className="buttons">
+                            <div className="btn Plus" onClick={incrementDa}>+</div>
+                            <div className="btn Min" onClick={decrementDa}>-</div>
+                        </div>
                     </div>    
                     <div className="category-container">
-                        <div className="data-points" onClick={updateCa} >
+                        <div className="data-points"  >
                             <div className="info">Creative Ability</div>
                             <div className="bars">{caDp}</div> 
                         </div>
-                        <div className="btn Plus"></div>
-                        <div className="btn Min"></div>
+                        <div className="buttons">
+                            <div className="btn Plus" onClick={incrementCa}>+</div>
+                            <div className="btn Min" onClick={decrementCa}>-</div>
+                        </div>
                     </div>
                     <div className="category-container">
-                        <div className="data-points" onClick={updateGs}>
+                        <div className="data-points" >
                             <div className="info">Goal Scoring</div>
                             <div className="bars">{gsDp}</div>
                         </div>
-                        <div className="btn Plus"></div>
-                        <div className="btn Min"></div>
+                        <div className="buttons">
+                            <div className="btn Plus" onClick={incrementGs}>+</div>
+                            <div className="btn Min" onClick={decrementGs}>-</div>
+                        </div>
                     </div>
                     <div className="category-container">
-                        <div className="data-points" onClick={updateBr}>
+                        <div className="data-points" >
                             <div className="info">Ball Retention</div>
-                            <div className="bars">{brDp}</div>
+                            <div className="bars">{passvDp}</div>
                         </div>
-                        <div className="btn Plus"></div>
-                        <div className="btn Min"></div>
+                        <div className="buttons">
+                            <div className="btn Plus" onClick={incrementpassv}>+</div>
+                            <div className="btn Min" onClick={decrementpassv}>-</div>
+                        </div>
                     </div>
                     <div className="data-count">
                         <div>Points</div>

@@ -1,0 +1,148 @@
+:root{
+    --dark-pink:#D83F87;
+    /* Three primary*/
+    --dark-purple:#2A1B3D;
+    --purple: #B93DAF;
+    --red: #D43725;
+    /**/
+    --light-purple: #E98074;
+    --cloudy-green: #A4B3B6;
+    --primary-color:#1A1110;
+    --secondary-color:#EDF5E1;
+    --third-color:#5CDB95;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container-fw{
+    width:100vw;
+    height: 100vh;
+    background-color: var(--primary-color);
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-fw{
+    width:100%;
+    background-color: var(--primary-color);
+    font-size: 3rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    overflow-x: hidden;
+    color:whitesmoke;
+    padding-top:1rem;
+    margin-bottom: 1rem;
+}
+
+.container-data-points{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:0.5rem;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+}
+
+.data-points{
+    width: 200px;
+    height: 300px;
+    border-radius: 1rem;
+    background-color: #5D5C61;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.category-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    
+}
+
+.btn-player{
+    width:100%;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.btn-generate{
+    width: 10rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #5CDB95;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.data-count{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width:100px;
+    height: 390px;
+    background-color: #5CDB95 ;
+    border-radius: 0.3rem;
+    
+}
+
+.bars{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    width:95%;
+    height: 95%;
+    background-color: inherit;
+    gap:1.6%;
+    margin-bottom: 0.5rem;
+}
+
+.bar{
+    width:95%;
+    height: 5%;
+    background-color: #F13C20;
+    border-radius: 6px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap:0.5rem;
+}
+
+.btn{
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    font-size: 7rem;
+    font-weight: 600;
+    color: white;
+}
+
+.Plus {
+    background-color: #5CDB95;
+}
+
+.Min{
+    background-color: var(--red);
+}
