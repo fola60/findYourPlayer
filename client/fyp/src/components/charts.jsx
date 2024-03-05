@@ -156,18 +156,20 @@ export default function Charts(props){
     
 
     return (
-        <>  <Link to="/">
-                <div className='logo-fyp'>
-                        <img src={logo} className='logo'/>
+        <>  
+            <div className="chart-container">
+                <Link to="/">
+                    <div className='logo-fyp'>
+                            <img src={logo} className='logo'/>
+                    </div>
+                </Link>
+                <div className='radar-container'>
+                    <Radar 
+                    data={playerData}
+                    options= {options}
+                    />
                 </div>
-            </Link>
-            <div className='radar-container'>
-                <Radar 
-                data={playerData}
-                options= {options}
-                />
             </div>
-                      
         </>
     )
 }

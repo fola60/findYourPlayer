@@ -1,3 +1,9 @@
+:root{
+    --primary-color:#41B3A3;
+    --secondary-color:#E27D60;
+    --third-color:#C38D9E;
+}
+
 .search-bar-container {
     padding-top:3vh;
     width:40%;
@@ -9,12 +15,13 @@
 
 .input-wrapper{
     display: flex;
+    gap:1rem;
     flex-direction: row;
     background:transparent;
     width:100%;
     height:2.5rem;
     border-radius: 10px;
-    border:2px solid #A4B3B6;
+    border:2px solid white;
     padding: 0 15px;
     align-items: center;
     
@@ -39,7 +46,7 @@ input:focus {
 #search-icon {
     height:20px;
     width:auto;
-    color:#B93DAF;
+    color:#E27D60;
 }
 
 #search-results {
@@ -62,17 +69,17 @@ input:focus {
     padding:0.75rem;
     display: flex;
     flex-direction: row;
-    margin:0px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+    display: flex;
     gap:0px;
+    max-height: 3.3rem;
+    flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 ::-webkit-scrollbar {
     background-color: #2A1B3D;
     border-radius:6px ;
-    width:0.5rem;
+    width:0.3rem;
 }
 
 .linkTo{
@@ -87,8 +94,7 @@ input:focus {
 }
 
 .Link:hover{
-    color:red;
-    font-size: 120%;
+    font-size: 105%;
 }
 
 .logo-fyp{

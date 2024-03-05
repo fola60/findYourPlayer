@@ -13,22 +13,22 @@ export default function MfDP(props,{updateBr,updateCa,updateDa,updateGs,updateHv
     
 
 
-    if(pos == "mf"){
+    
         return(
         <>
-            <div className="container-data-points">
-                <div className="data-points" onClick={updateHvp}>High Volume passing :{hvp}</div>
-                <div className="data-points" onClick={updateDa}>Defensive Ability :{da}</div>
-                <div className="data-points" onClick={updateCa}>Creative Ability: {ca}</div>
-                <div className="data-points" onClick={updateGs}>Goal Scoring: {gs}</div>
-                <div className="data-points" onClick={updateBr}>Ball Retention: {br}</div>
+            <div className="container-data-points" key={key}>
+                <div className="data-points" onClick={() => updateHvp}>High Volume passing :{hvp}</div>
+                <div className="data-points" onClick={() => updateDa}>Defensive Ability :{da}</div>
+                <div className="data-points" onClick={() => updateCa}>Creative Ability: {ca}</div>
+                <div className="data-points" onClick={() => updateGs}>Goal Scoring: {gs}</div>
+                <div className="data-points" onClick={() => updateBr}>Ball Retention: {br}</div>
                 <div className="data-points">{dataPoints}</div>
                     <div className="data-points" 
-                    onClick={sendData}
+                    onClick={() => sendData}
                     >Generate Player!
                     </div>
             </div>
         </>
         )   
-    }
+    
 }

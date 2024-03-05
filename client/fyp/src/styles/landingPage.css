@@ -7,6 +7,9 @@
     /**/
     --light-purple: #E98074;
     --cloudy-green: #A4B3B6;
+    --primary-color:black;
+    --secondary-color:#EDF5E1;
+    --third-color:#5CDB95;
 }
 
 * {
@@ -14,31 +17,51 @@
     padding: 0;
 }
 
-body {
-    width:100vw;
-    height: 100vh;
-    background-image: linear-gradient(to bottom right,var(--dark-purple),var(--purple));
-
-}
 
 
 .container {
-    height:100%;
-    width:100%;
+    height:100vh;
+    width:100vw;
+    margin:0px;
     display:flex;
     flex-direction: column;
-    
+    /*background-color: var(--primary-color);*/
+    background-image: url("../img/starBackround.png");
+    background-size: cover;
+    overflow: hidden;
+}
+
+.landing-container{
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-landing{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    margin-bottom: 2rem;
 }
 
 .search-bar-container {
-    margin-top: 1rem;
-    padding-top:3vh;
     width:100%;
     display:flex;
     flex-direction: column;
-    align-items: center;
     min-width: 200px;
+    
   }
+
+.landing-body{
+    width:100%;
+    height: 80vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
 
 .logo-fyp{
     height:30px;
@@ -46,16 +69,13 @@ body {
    
 }
 
-.logo{
-    height:500px;
-    width:550px;
-}
+
 
 .league-link{
-    height:500px;
-    width: 550px;
+ 
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .Link{
@@ -64,6 +84,127 @@ body {
 }
 
 .Link:hover{
-    color:red;
-    font-size: 120%;
+    color:var(--third-color);
+    font-size: 105%;
 }
+
+.search-icon{
+    height:100px;
+    width:100px;
+    animation-name: pulse ;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+    0% {
+        width:100px;
+        height: 100px;
+        
+    }
+    50% {
+        margin-bottom: 1rem;
+    }
+    100% {
+        margin-bottom: 0rem;
+    }
+}
+
+.logo-div{
+    display: flex;
+    flex-direction: column;
+    padding:1rem;
+}
+
+.top-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:1rem;
+}
+
+.bottom-logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding:1rem;
+}
+
+@media only screen and (min-width:900px){
+    .player-photo{
+        display: block;
+    }
+}
+    .player-photo{
+        height:100%;
+        padding:7rem;
+        display: flex;
+        flex-direction: row;
+        gap:2rem;
+    }
+
+    .player-1{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .player-2{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .player-3{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .player-4{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .Img-lp{
+        width: 200px;
+        height:250px;
+        border-radius: 1rem;
+    }
+
+    .img1{
+        
+    }
+
+    .img2{
+
+    }
+
+.text-logo{
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+    typing 1s forwards,
+    link-caret .75s step-end infinite;
+    animation-iteration-count: infinite;
+}
+@keyframes typing {
+    0% { width: 0 }
+    50% { width: 50% }
+    100% {width: 100%}
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }

@@ -1,0 +1,170 @@
+:root{
+    --dark-pink:#D83F87;
+    /* Three primary*/
+    --dark-purple:#2A1B3D;
+    --purple: #B93DAF;
+    --red: #D43725;
+    /**/
+    --light-purple: #E98074;
+    --cloudy-green: #A4B3B6;
+    --primary-color:black;
+    --secondary-color:#8EE4AF;
+    --third-color:#5CDB95;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.pick-stats-container{
+    height: 100vh;
+    width: 100vw;
+    background-color: #1A1110;
+    flex-wrap: wrap;
+    color:white;
+    flex-direction: column;
+    overflow-x: hidden;
+    align-items:center ;
+    justify-content: center
+}
+
+.league-container{
+    min-height:45%;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.league{
+    height: 200px;
+    width:200px;
+    padding: 1rem;
+}
+
+.container-position{
+    width:100%;
+    max-height: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.position{
+    max-width:150px;
+    max-height:150px;
+    min-width:50px;
+    min-height:50px;
+    display: flex;
+    
+    flex-wrap: wrap;
+}
+
+.link{
+    height:45px;
+    padding:0.75rem;
+    
+}
+
+
+.Link{
+    text-decoration: none;
+    color:white;
+}
+
+.next-container{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3rem;
+}
+
+.next-btn{
+    height: 100%;
+    padding:1rem;
+    width: 5rem;
+    border-radius: 1rem;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.next-btn:active{
+    background-color: green;
+}
+
+
+
+
+.data-points{
+    width:100px;
+}
+
+.hide{
+    
+    display:none;
+}
+
+.Img-ps {
+    width:200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 0.5rem  ;
+    border: solid red;
+       
+}
+
+.h1tag{
+    color:white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.img-pos{
+    width:250px;
+    height:300px;
+    background-color: #0C0032 ;
+    border:2px solid red;
+    border-radius: 1rem;
+}
+
+.highlighted{
+    border: solid green;
+}
+
+.highlighted-pos{
+    border:solid 0.5rem green;
+}
+
+@keyframes bigger-league{
+    from{
+        width:100%;
+        height:100%;
+    } to {
+        width:110%;
+        height: 110%;
+    }
+}
+
+@keyframes bigger-pos{
+    from{
+        width:100%;
+        height: 100%;
+    } to {
+        width:110%;
+        height: 110%;
+    }
+}

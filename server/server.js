@@ -17,25 +17,12 @@ const io = new Server(serverS, {
 
 io.on("connection", (socket) => {
     let dataPoints;
+    let playerData;
     socket.on("send_id", (data) => {
         socket.broadcast.emit("receive_id", data);
         console.log("received id : " + data.id);
     });
     socket.on("send_league", (data) => { 
-        if (data == 1){
-            data = "prem";
-        } else if(data == 2){
-            data = "bundesliga";
-        } else if(data == 3){
-            data = "ligue1";
-        } else if(data == 4){
-            data = "seriea";
-        } else if(data == 5){
-            data = "laliga";
-        } else {
-            data = "prem"
-        }
-        
         socket.broadcast.emit("received_league", data);
         console.log("received league : " + data);
     });
@@ -48,8 +35,13 @@ io.on("connection", (socket) => {
         dataPoints = data;
         console.log("received data points! :", dataPoints);
     });
+    socket.on("send_players",(data) => {
+        socket.broadcast.emit("receive_players",data);
+        console.log("received player" + data[0].player);
+    })
     socket.on("send_player_data",(data) =>{
         for (let i = 0;i < data.length; i++){
+            console.log(data[i]);
             data[i].score = (data[i].mf_hvp * dataPoints.hvp) + (data[i].mf_da * dataPoints.da) + (data[i].mf_ca * dataPoints.ca) + (data[i].mf_gs * dataPoints.gs) + (data[i].mf_br  * dataPoints.br);
         }
         data.sort((a,b) => b.score - a.score);
@@ -59,10 +51,10 @@ io.on("connection", (socket) => {
 })
 
 serverS.listen(3500, () => {
-    console.log("socket started on port 3500")
+    console.log("socket started on port 3500");
 });
 
-app.use(express.json())
+app.use(express.json());
 
 //ROUTES//
 

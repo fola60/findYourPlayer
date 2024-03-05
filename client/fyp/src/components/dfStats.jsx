@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
-import '../styles/pickLeague.css'
+import '../styles/pickStats.css'
 import io from 'socket.io-client'
 import { useEffect, useState } from 'react'
 

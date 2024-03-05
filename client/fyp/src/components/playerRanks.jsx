@@ -31,7 +31,7 @@ export default function PlayerRank(){
                             playerRanked.map((result,id) => {
                                 return (
                                     <>
-                                        <div className="player-stats">
+                                        <div className="player-stats" key={uuid}>
                                             <div className="number">Rank :{id + 1}</div>
                                             <div className="name"> Name:{result.player}</div>
                                             <div className="age">Date of Birth:{result.age}</div>
