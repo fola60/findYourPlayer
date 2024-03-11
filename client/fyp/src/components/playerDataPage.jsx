@@ -13,14 +13,11 @@ export default function PlayerDataPage(props){
     useEffect(() =>{
         socket.on("receive_id", (data) => {
             setId(data.id);
-            console.log('received id')
+            
         })
         
     }, [socket]);
     
-    
-    
-
     
 
     useEffect(() => {
@@ -36,6 +33,7 @@ export default function PlayerDataPage(props){
             }
         }
         getData();
+        console.log("Id: " + id);
     },[id]);
     
 

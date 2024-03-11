@@ -1,18 +1,37 @@
+
+
 .chart-container{
-    height:100vh;
+    max-height: fit-content;
     width:100vw;
     display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.header-chart{
+    width: 100%;
+    max-height: fit-content;
+    overflow-x: hidden;
 }
 
 .data-container{
     width:100%;
+    max-height: fit-content;
+    overflow-x: hidden;
 }
 
 
 .radar-container{
-    width:800px;
+    width:700px;
     padding:20px;
-    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
 }
 
 .name{
@@ -22,11 +41,17 @@
 }
 
 .logo-fyp{
-    height:30px;
+    height:200px;
+    width:230px;
     
 }
 
 .logo{
-    height:200px;
-    width:230px;
+    height:100%;
+    width:100%;
+}
+
+.chart{
+    width:500px;
+    height: auto;
 }

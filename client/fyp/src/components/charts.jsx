@@ -21,6 +21,8 @@ ChartJS.register(
     LineElement,
     Tooltip,
     Legend,
+    ArcElement,
+    Filler
 )
 export default function Charts(props){
     const [data,setData] = useState(props.data);
@@ -28,12 +30,13 @@ export default function Charts(props){
     const [loaded,setLoaded] = useState(0);
     const [name,setName] = useState("Player 1");
     const [charts,setCharts] = useState(<></>);
-    /*
+    
     const [paChartData,setPaChartData] = useState({
         labels: ['Completed passes ', 'Short Completed pass ', 'Medium Completed pass  ', 'Long Completed pass ', 'Passes Received', 'Progressive Passes Received', 'Key Passes'],
         datasets: [
             {
-                label: 'Per 90 Stats',
+                label: 'Passing Stats',
+                //data: [data.cmp_90per,data.sho_cmppctper,data.med_cmppctper,data.lon_cmppctper,data.p_rec90per,data.prg_prec90per,data.kp90per],
                 data: [0,0,0,0,0,0,0],
                 backgroundColor:[
                     'blue',
@@ -48,7 +51,7 @@ export default function Charts(props){
             }
         ]
     });
-    */
+    
     const [playerData,setPlayerData] = useState({
         labels:['Passing','Shooting','Defending','Press Resistance', 'dribbling'],
         datasets: [
@@ -80,20 +83,47 @@ export default function Charts(props){
             }
         }
     }
-    // const optionsPolar = {
-    //     type: 'polarArea',
-    //     data: data,
-    //     options: {
-
-    //     },
-    //     scales: {
-    //         r:{
-    //             suggestedMin: 0,
-    //             suggestedMax: 100
-    //         }
-    //     }
+     const optionsPolar = {
+        options: {
+            responsive:true,
+            plugins: {
+                legend:{
+                    display:false,
+                },
+                title: {
+                    display:false,
+                }
+            }
+        },
         
-    // }
+        scales: {
+            r:{
+                suggestedMin: 0,
+                suggestedMax: 100,
+                grid: {
+                    circular:true,
+                    color:"#000"
+                },
+                angleLines:{
+                    display:true,
+                    color:"#000",
+                    lineWidth:1,
+                },
+                pointLabels:{
+                    display:true,
+                    font:{
+                        size:15
+                    },
+                    padding:0,
+                    centerPointLabels:true,
+                },
+                ticks:{
+                    display:false,
+                }
+            }
+        }
+        
+     }
     useEffect(() => {
         setData(props.data)
         setUpdate(Math.random())
@@ -150,6 +180,26 @@ export default function Charts(props){
                     ],
                 })
             }
+            setPaChartData({
+                labels: ['Completed passes ', 'Short Completed pass ', 'Medium Completed pass  ', 'Long Completed pass ', 'Passes Received', 'Progressive Passes Received', 'Key Passes'],
+                datasets: [
+                    {
+                        label: 'Passing Stats',
+                        data: [data.cmp90per,data.sho_cmppctper,data.med_cmppctper,data.lon_cmppctper,data.p_rec90per,data.prg_prec90per,data.kp90per],
+                        //data: [0,0,0,0,0,0,0],
+                        backgroundColor:[
+                            'blue',
+                            'green',
+                            'red',
+                            'black',
+                            'orange',
+                            'grey',
+                            'pink'
+                        ],
+                        borderWidth: 1,
+                    }
+                ]
+            })
             
         }
     },[update])
@@ -158,16 +208,28 @@ export default function Charts(props){
     return (
         <>  
             <div className="chart-container">
-                <Link to="/">
-                    <div className='logo-fyp'>
-                            <img src={logo} className='logo'/>
-                    </div>
-                </Link>
+                <div className="header-chart">
+                    <Link to="/" >
+                        <div className='logo-fyp'>
+                                <img src={logo} className='logo'/>
+                        </div>
+                    </Link>
+                </div>
                 <div className='radar-container'>
                     <Radar 
                     data={playerData}
                     options= {options}
                     />
+                </div>
+                <div className="charts-container">
+                    <div className="chart">
+                        {data ? <PolarArea data={paChartData} options={optionsPolar}/> : ""}
+                    </div>
+                    <div className="chart"></div>
+                    <div className="chart"></div>
+                    <div className="chart"></div>
+                    <div className="chart"></div>
+                    <div className="chart"></div>
                 </div>
             </div>
         </>

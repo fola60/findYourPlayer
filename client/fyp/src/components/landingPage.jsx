@@ -18,7 +18,7 @@ export default function LandingPage(props){
     
         return (
             <>  
-                <div className='container'>
+                <div className='container-landing'>
                     <div className="landing-container">
                         <div className="header-landing">
                             <SearchBar className='search-bar-container'/>

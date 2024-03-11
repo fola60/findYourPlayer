@@ -11,17 +11,17 @@ const socket = io.connect("http://localhost:3500");
 export default function FwStats(){
 
     const [dataPoints,setDataPoints] = useState(15);
-    const [hvp,setHvp] = useState(0);
-    const [da,setDa] = useState(0);
-    const [ca,setCa] = useState(0);
-    const [gs,setGs] = useState(0);
-    const [br,setBr] = useState(0);
+    const [dr,setdr] = useState(0);
+    const [cm,setcm] = useState(0);
+    const [fin,setfin] = useState(0);
+    const [pr,setpr] = useState(0);
+    const [pass,setpass] = useState(0);
 
-    const [hvpDp,setHvpDp] = useState([]);
-    const [daDp,setDaDp] = useState([]);
-    const [caDp,setCaDp] = useState([]);
-    const [gsDp,setGsDp] = useState([]);
-    const [brDp,setBrDp] = useState([]);
+    const [drDp,setdrDp] = useState([]);
+    const [cmDp,setcmDp] = useState([]);
+    const [finDp,setfinDp] = useState([]);
+    const [prDp,setprDp] = useState([]);
+    const [passDp,setpassDp] = useState([]);
     
     const [players,setPlayers] = useState(null);
     const [bar,setBar] = useState([<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,]);
@@ -30,11 +30,11 @@ export default function FwStats(){
     
     useEffect(() => {
         setBar([]);
-        setHvpDp([]);
-        setDaDp([]);
-        setCaDp([]);
-        setGsDp([]);
-        setBrDp([]);
+        setdrDp([]);
+        setcmDp([]);
+        setfinDp([]);
+        setprDp([]);
+        setpassDp([]);
 
         let bars = [];
         for(let i = 0;i < dataPoints;i++){
@@ -42,35 +42,36 @@ export default function FwStats(){
         }
         setBar(bars);
 
-        let barsHvp = [];
-        for(let i = 0;i < hvp;i++){
-            barsHvp.push(<div className='bar'></div>)
+        let barsdr = [];
+        for(let i = 0;i < dr;i++){
+            barsdr.push(<div className='bar'></div>)
         }
-        setHvpDp(barsHvp);
+        setdrDp(barsdr);
 
-        let barsDa = [];
-        for(let i = 0;i < da;i++){
-            barsDa.push(<div className='bar'></div>)
+        let barscm = [];
+        for(let i = 0;i < cm;i++){
+            barscm.push(<div className='bar'></div>)
         }
-        setDaDp(barsDa);
+        setcmDp(barscm);
 
-        let barsCa = [];
-        for(let i = 0;i < ca;i++){
-            barsCa.push(<div className='bar'></div>)
+        let barsfin = [];
+        for(let i = 0;i < fin;i++){
+            barsfin.push(<div className='bar'></div>)
         }
-        setCaDp(barsCa);
+        setfinDp(barsfin);
 
-        let barsGs = [];
-        for(let i = 0;i < gs;i++){
-            barsGs.push(<div className='bar'></div>)
+        let barspr = [];
+        for(let i = 0;i < pr;i++){
+            barspr.push(<div className='bar'></div>)
         }
-        setGsDp(barsGs);
+        setprDp(barspr);
 
-        let barsBr = [];
-        for(let i = 0;i < br;i++){
-            barsBr.push(<div className='bar'></div>)
+        let barspass = [];
+        for(let i = 0;i < pass;i++){
+            barspass.push(<div className='bar'></div>)
         }
-        setBrDp(barsBr);
+        setpassDp(barspass);
+        console.log(cm);
      },[dataPoints]);
 
     useEffect(() => {
@@ -84,68 +85,70 @@ export default function FwStats(){
     },[players]);
 
 
-    function incrementHvp(){
+    function incrementdr(){
         if(dataPoints > 0){
-            setHvp(hvp + 1);
+            setdr(dr + 1);
             setDataPoints(dataPoints - 1);
         }
     }
-    function decrementHvp(){
-        if(hvp > 0) {
-            setHvp(hvp -1);
+    function decrementdr(){
+        if(dr > 0) {
+            setdr(dr -1);
             setDataPoints(dataPoints + 1);
         }
     }
 
-    function incrementDa(){
+    function incrementcm(){
         if(dataPoints > 0){
-            setDa(da + 1);
+            setcm(cm + 1);
+            setDataPoints(dataPoints - 1);
+        }
+        console.log('clicked cm +' + cm);
+    }
+
+    function decrementcm(){
+        if(cm > 0) {
+            setcm(cm - 1);
+            setDataPoints(dataPoints - 1);
+        }
+        console.log('clicked cm -' + cm);
+    }
+
+    function incrementfin(){
+        if(dataPoints > 0){
+            setfin(fin + 1);
             setDataPoints(dataPoints - 1);
         }
     }
-
-    function decrementDa(){
-        if(da > 0) {
-            setDa(da -1);
+    function decrementfin(){
+        if(fin > 0) {
+            setfin(fin -1);
             setDataPoints(dataPoints + 1);
         }
     }
 
-    function incrementCa(){
+    function incrementpr(){
         if(dataPoints > 0){
-            setCa(ca + 1);
+            setpr(pr + 1);
             setDataPoints(dataPoints - 1);
         }
     }
-    function decrementCa(){
-        if(ca > 0) {
-            setCa(ca -1);
+    function decrementpr(){
+        if(pr > 0) {
+            setpr(pr -1);
             setDataPoints(dataPoints + 1);
         }
     }
 
-    function incrementGs(){
+    function incrementpass(){
         if(dataPoints > 0){
-            setGs(gs + 1);
+            setpass(pass + 1);
             setDataPoints(dataPoints - 1);
         }
     }
-    function decrementGs(){
-        if(gs > 0) {
-            setGs(gs -1);
-            setDataPoints(dataPoints + 1);
-        }
-    }
-
-    function incrementBr(){
-        if(dataPoints > 0){
-            setBr(br + 1);
-            setDataPoints(dataPoints - 1);
-        }
-    }
-    function decrementBr(){
-        if(br > 0) {
-            setBr(br -1);
+    function decrementpass(){
+        if(pass > 0) {
+            setpass(pass -1);
             setDataPoints(dataPoints + 1);
         }
     }
@@ -153,12 +156,12 @@ export default function FwStats(){
 
     function sendData(){
         if (dataPoints <= 0){
-            socket.emit("send_data_points",{hvp:hvp,da:da,ca:ca,gs:gs,br:br})
+            socket.emit("send-data_points_fw",{dr:dr,cm:cm,fin:fin,pr:pr,pass:pass})
         }
         socket.on("receive_players", (data) => {
             setPlayers(data);
         })
-        socket.emit("send_player_data",players);
+        socket.emit("send_player_data_fw",players);
 
     }
 
@@ -169,59 +172,58 @@ export default function FwStats(){
             <div className="container-data-points">
                     <div className="category-container">
                         <div className="data-points" >
-                            <div className="info">High Volume passing</div>
-                            <div className="bars">{hvpDp}</div>
+                            <div className="info">Dribbling</div>
+                            <div className="bars">{drDp}</div>
                         </div>
                         <div className="buttons">
-                            <div className="btn Plus" onClick={incrementHvp}>+</div>
-                            <div className="btn Min" onClick={decrementHvp}>-</div>
+                            <div className="btn Plus" onClick={incrementdr}>+</div>
+                            <div className="btn Min" onClick={decrementdr}>-</div>
                         </div>
                     </div>
                     <div className="category-container">
                         <div className="data-points" >
-                            <div className="info">Defensive Ability</div>
-                            <div className="bars">{daDp}</div>
+                            <div className="info">Chance Magnet</div>
+                            <div className="bars">{cmDp}</div>
                         </div>
                         <div className="buttons">
-                            <div className="btn Plus" onClick={incrementDa}>+</div>
-                            <div className="btn Min" onClick={decrementDa}>-</div>
+                            <div className="btn Plus" onClick={incrementcm}>+</div>
+                            <div className="btn Min" onClick={decrementcm}>-</div>
                         </div>
                     </div>    
                     <div className="category-container">
                         <div className="data-points"  >
-                            <div className="info">Creative Ability</div>
-                            <div className="bars">{caDp}</div> 
+                            <div className="info">Finishing</div>
+                            <div className="bars">{finDp}</div> 
                         </div>
                         <div className="buttons">
-                            <div className="btn Plus" onClick={incrementCa}>+</div>
-                            <div className="btn Min" onClick={decrementCa}>-</div>
+                            <div className="btn Plus" onClick={incrementfin}>+</div>
+                            <div className="btn Min" onClick={decrementfin}>-</div>
                         </div>
                     </div>
                     <div className="category-container">
                         <div className="data-points" >
-                            <div className="info">Goal Scoring</div>
-                            <div className="bars">{gsDp}</div>
+                            <div className="info">Pressing</div>
+                            <div className="bars">{prDp}</div>
                         </div>
                         <div className="buttons">
-                            <div className="btn Plus" onClick={incrementGs}>+</div>
-                            <div className="btn Min" onClick={decrementGs}>-</div>
+                            <div className="btn Plus" onClick={incrementpr}>+</div>
+                            <div className="btn Min" onClick={decrementpr}>-</div>
                         </div>
                     </div>
                     <div className="category-container">
                         <div className="data-points" >
-                            <div className="info">Ball Retention</div>
-                            <div className="bars">{brDp}</div>
+                            <div className="info">Passing</div>
+                            <div className="bars">{passDp}</div>
                         </div>
                         <div className="buttons">
-                            <div className="btn Plus" onClick={incrementBr}>+</div>
-                            <div className="btn Min" onClick={decrementBr}>-</div>
+                            <div className="btn Plus" onClick={incrementpass}>+</div>
+                            <div className="btn Min" onClick={decrementpass}>-</div>
                         </div>
                     </div>
                     <div className="data-count">
                         <div>Points</div>
                         <div className="bars">{bar}</div>
                     </div>
-                
             </div>
             <div className="btn-player">
                 <Link to="player-rank" className="link">

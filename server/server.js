@@ -17,7 +17,11 @@ const io = new Server(serverS, {
 
 io.on("connection", (socket) => {
     let dataPoints;
-    let playerData;
+    let dataPointsFw;
+    let dataPointsDf;
+    let mfBool = false;
+    let fwBool = false;
+    let dfBool = false;
     socket.on("send_id", (data) => {
         socket.broadcast.emit("receive_id", data);
         console.log("received id : " + data.id);
@@ -34,20 +38,81 @@ io.on("connection", (socket) => {
         socket.broadcast.emit("receive_data_points",data);
         dataPoints = data;
         console.log("received data points! :", dataPoints);
+        mfBool = true;
+        dfBool = false;
+        fwBool = false;
     });
+    socket.on("send-data_points_fw", (data) => {
+        socket.broadcast.emit("receive_data_points_fw",data);
+        dataPointsFw = data;
+        console.log("received data points Forward! :", dataPointsFw);
+        fwBool = true;
+        mfBool = false;
+        dfBool = false;
+    })
+    socket.on("send-data_points_df", (data) => {
+        socket.broadcast.emit("receive_data_points_df",data);
+        dataPointsDf = data;
+        console.log("received data points Defender! :", dataPointsDf);
+        dfBool = true;
+        mfBool = false;
+        fwBool = false;
+    })
     socket.on("send_players",(data) => {
         socket.broadcast.emit("receive_players",data);
-        console.log("received player" + data[0].player);
+        console.log("received player: " + data[0].player);
     })
     socket.on("send_player_data",(data) =>{
-        for (let i = 0;i < data.length; i++){
-            console.log(data[i]);
-            data[i].score = (data[i].mf_hvp * dataPoints.hvp) + (data[i].mf_da * dataPoints.da) + (data[i].mf_ca * dataPoints.ca) + (data[i].mf_gs * dataPoints.gs) + (data[i].mf_br  * dataPoints.br);
+        if(mfBool && data){
+            for (let i = 0;i < data.length; i++){
+                console.log(data[i]);
+                data[i].score = (data[i].mf_hvp * dataPoints.hvp) + (data[i].mf_da * dataPoints.da) + (data[i].mf_ca * dataPoints.ca) + (data[i].mf_gs * dataPoints.gs) + (data[i].mf_br  * dataPoints.br);
+            }
+            data.sort((a,b) => b.score - a.score);
+            socket.broadcast.emit("receive_sorted_player", data.slice(0,50));
+            console.log(data);
+            
+            console.log("Player received!");
+            fwBool = false;
+            mfBool = false;
+            fwBool = false;
         }
-        data.sort((a,b) => b.score - a.score);
-        socket.broadcast.emit("receive_sorted_player", data.slice(0,50));
-        console.log(data);
+
+        socket.broadcast.emit("receive_sorted_player", null);
     });
+    socket.on("send_player_data_fw", (data) => {
+        if(fwBool && data){
+            for(let i = 0;i < data.length; i++){
+                data[i].score = (data[i].fw_pr * dataPointsFw.pr) + (data[i].fw_fin * dataPointsFw.fin) + (data[i].fw_dr * dataPointsFw.dr) + (data[i].fw_cm * dataPointsFw.cm) + (data[i].fw_pass * dataPointsFw.pass);
+            }
+            data.sort((a,b) => b.score - a.score);
+            socket.broadcast.emit("receive_sorted_player_fw", data.slice(0,50));
+            
+            console.log("Player received!");
+            fwBool = false;
+            mfBool = false;
+            fwBool = false;
+        } else {
+            console.log("Forward Fail!")
+        }
+    });
+    socket.on("send_player_data_df", (data) => {
+        if(dfBool && data){
+            for(let i = 0;i < data.length; i++){
+                data[i].score = (data[i].df_aggr * dataPointsDf.aggr) + (data[i].df_bpa * dataPointsDf.bpa) + (data[i].df_passv * dataPointsDf.passv) + (data[i].df_aa * dataPointsDf.aa) + (data[i].df_da * dataPointsDf.da) + (data[i].df_pr * dataPointsDf.pr);
+            }
+            data.sort((a,b) => b.score - a.score);
+            socket.broadcast.emit("receive_sorted_player_df", data.slice(0,50));
+            
+            console.log("Player received!");
+            fwBool = false;
+            mfBool = false;
+            fwBool = false;
+        } else {
+            console.log("Defender Fail!");
+        }
+    });
+
 })
 
 serverS.listen(3500, () => {
@@ -174,7 +239,7 @@ app.get("/allValue/pos/df/league/prem", async (req,res) => {
         JOIN playerdataPER ON playerdata.per_id = playerdataper.id
         JOIN playerclasses ON playerdataper.plcl_id = playerclasses.id WHERE pos IN ('DF', 'DF,FW') AND comp = 'Premier League';`);
         
-        res.json(playerPosDf.rows)
+        res.json(playerPosDfPl.rows)
         console.log(playerPosDfPl.rows.length)
     } catch (err){
         console.error(err.message);
@@ -219,7 +284,7 @@ app.get("/allValue/pos/df/league/bundesliga", async (req,res) => {
         JOIN playerdataPER ON playerdata.per_id = playerdataper.id
         JOIN playerclasses ON playerdataper.plcl_id = playerclasses.id WHERE pos IN ('DF', 'DF,FW') AND comp = 'Bundesliga';`);
         
-        res.json(playerPosDf.rows)
+        res.json(playerPosDfPl.rows)
         console.log(playerPosDfPl.rows.length)
     } catch (err){
         console.error(err.message);

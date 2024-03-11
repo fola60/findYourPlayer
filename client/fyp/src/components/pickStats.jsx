@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import '../styles/pickStats.css'
 import io from 'socket.io-client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import uuid from 'react-uuid'
 import prem from '../img/prem.png'
 import bundesliga from '../img/bundesliga.png'
@@ -16,6 +16,8 @@ import kim from '../img/kimMinJae.png'
 const socket = io.connect("http://localhost:3500");
 
 export default function PickStats(){
+    const linkRef = useRef(null);
+
     const [league,setLeague] = useState(null);
     const [pos,setPos] = useState("");
     const [path,setPath] = useState("player-league");
@@ -27,24 +29,32 @@ export default function PickStats(){
     const [boolDf,setBoolDf] = useState(false);
     const [boolMf,setBoolMf] = useState(false);
     const [boolFw,setBoolFw] = useState(false);
+    const [get,setGet] = useState(null);
 
     
   
    
     function sendData(){
+        console.log("Send data clicked!");
+        console.log(`Pos: ${pos} league: ${league}`);
         const sendPlayerData = async () => {
             try {
                 const response = await fetch(`allValue/pos/${pos}/league/${league}`);
                 const result = await response.json();
                 socket.emit("send_players", result);
-                console.log(result);
-               
+                setGet(result)
+                
             } catch (error) {
-                console.error('Error fetching data ', error);
+                console.error('Error fetching data ' + error);
             }
         }
         sendPlayerData();
+        
+
     }
+    useEffect(() => {
+        console.log(get);
+    },[get]);
 
     
     
@@ -138,14 +148,18 @@ export default function PickStats(){
             setPath("player-position-df");
         }
     },[pos])
-    
+    function scrollLink(){
+        if(linkRef.current){
+            linkRef.current.scrollIntoView({behavior:'smooth'});
+        }
+    }
 
 
     return (
         <>
         <div className="pick-stats-container">
             <h1 className='h1tag'>Pick a League</h1>
-            <div className='league-container'>
+            <div className='league-container' onClick={scrollLink}>
                     <div className='league Img' id='prem' onClick={setLeaguePrem}>
                         <img className={boolPrem ? 'Img-ps highlighted': 'Img-ps'} src={prem} onClick={highlightPrem} />
                     </div>
@@ -173,12 +187,12 @@ export default function PickStats(){
                     <div className="pos-text">Midfielder</div>
                     <img src={kroos} className={boolMf ? 'img-pos highlighted-pos' : 'img-pos'} onClick={highlightMf} />
                 </div>
-                <div className="position" onClick={setPosFw}>
+                <div className="position" onClick={setPosFw} >
                     <div className="pos-text">Forward</div>
                     <img src={lewandowski} className={boolFw ? 'img-pos highlighted-pos' : 'img-pos'} onClick={highlightFw} />
                 </div>
             </div>
-            <div className="link">
+            <div className="link" ref={linkRef}>
                         <Link to={path} className="Link next-container">
                             <div className='next-btn ' onClick={sendData}>Next!</div>
                         </Link>

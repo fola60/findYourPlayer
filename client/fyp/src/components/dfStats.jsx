@@ -15,18 +15,18 @@ export default function DfStats(){
     const [da,setDa] = useState(0);
     const [pr,setpr] = useState(0);
     const [aggr,setaggr] = useState(0);
-    const [br,setBr] = useState(0);
+    const [passv,setpassv] = useState(0);
     const [attabb,setattabb] = useState(0);
 
     const [bpaDp,setbpaDp] = useState([]);
     const [daDp,setDaDp] = useState([]);
     const [prDp,setprDp] = useState([]);
     const [aggrDp,setaggrDp] = useState([]);
-    const [brDp,setBrDp] = useState([]);
+    const [passvDp,setpassvDp] = useState([]);
     const [attabbDp,setattabbDp] = useState([]);
     
     const [players,setPlayers] = useState(null);
-    const [bar,setBar] = useState([<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,]);
+    const [bar,setBar] = useState([<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,]);
 
 
     
@@ -36,47 +36,47 @@ export default function DfStats(){
         setDaDp([]);
         setprDp([]);
         setaggrDp([]);
-        setBrDp([]);
+        setpassvDp([]);
 
         let bars = [];
         for(let i = 0;i < dataPoints;i++){
-            bars.push(<div className='bar'></div>)
+            bars.push(<div className='bar-df'></div>)
         }
         setBar(bars);
 
         let barsbpa = [];
         for(let i = 0;i < bpa;i++){
-            barsbpa.push(<div className='bar'></div>)
+            barsbpa.push(<div className='bar-df'></div>)
         }
         setbpaDp(barsbpa);
 
         let barsDa = [];
         for(let i = 0;i < da;i++){
-            barsDa.push(<div className='bar'></div>)
+            barsDa.push(<div className='bar-df'></div>)
         }
         setDaDp(barsDa);
 
         let barspr = [];
         for(let i = 0;i < pr;i++){
-            barspr.push(<div className='bar'></div>)
+            barspr.push(<div className='bar-df'></div>)
         }
         setprDp(barspr);
 
         let barsaggr = [];
         for(let i = 0;i < aggr;i++){
-            barsaggr.push(<div className='bar'></div>)
+            barsaggr.push(<div className='bar-df'></div>)
         }
         setaggrDp(barsaggr);
 
-        let barsBr = [];
-        for(let i = 0;i < br;i++){
-            barsBr.push(<div className='bar'></div>)
+        let barspassv = [];
+        for(let i = 0;i < passv;i++){
+            barspassv.push(<div className='bar-df'></div>)
         }
-        setBrDp(barsBr);
+        setpassvDp(barspassv);
 
         let barsattabb = [];
         for(let i = 0; i < attabb;i++){
-            barsattabb.push(<div className='bar'></div>)
+            barsattabb.push(<div className='bar-df'></div>)
         }
         setattabbDp(barsattabb);
 
@@ -146,15 +146,15 @@ export default function DfStats(){
         }
     }
 
-    function incrementBr(){
+    function incrementpassv(){
         if(dataPoints > 0){
-            setBr(br + 1);
+            setpassv(passv + 1);
             setDataPoints(dataPoints - 1);
         }
     }
-    function decrementBr(){
-        if(br > 0) {
-            setBr(br -1);
+    function decrementpassv(){
+        if(passv > 0) {
+            setpassv(passv -1);
             setDataPoints(dataPoints + 1);
         }
     }
@@ -175,12 +175,12 @@ export default function DfStats(){
 
     function sendData(){
         if (dataPoints <= 0){
-            //socket.emit("send_data_points",{bpa:bpa,da:da,pr:pr,aggr:aggr,br:br})
+            socket.emit("send-data_points_df",{bpa:bpa,da:da,pr:pr,aggr:aggr,passv:passv,aa:attabb})
         }
         socket.on("receive_players", (data) => {
             setPlayers(data);
         })
-        socket.emit("send_player_data",players);
+        socket.emit("send_player_data_df",players);
 
     }
 
@@ -231,12 +231,12 @@ export default function DfStats(){
                     </div>
                     <div className="category-container">
                         <div className="data-points" >
-                            <div className="info">Ball Retention</div>
-                            <div className="bars">{brDp}</div>
+                            <div className="info">Passiveness</div>
+                            <div className="bars">{passvDp}</div>
                         </div>
                         <div className="buttons">
-                            <div className="btn Plus" onClick={incrementBr}>+</div>
-                            <div className="btn Min" onClick={decrementBr}>-</div>
+                            <div className="btn Plus" onClick={incrementpassv}>+</div>
+                            <div className="btn Min" onClick={decrementpassv}>-</div>
                         </div>
                     </div>
                     <div className="category-container">
