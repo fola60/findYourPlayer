@@ -76,11 +76,11 @@ input:focus {
     overflow: hidden;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     background-color: #2A1B3D;
     border-radius:6px ;
     width:0.3rem;
-}
+} */
 
 .linkTo{
     height:45px;

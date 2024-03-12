@@ -9,6 +9,7 @@ const socket = io.connect("http://localhost:3500");
 
 
 export default function FwStats(){
+    const [path,setPath] = useState("player-position-fw");
 
     const [dataPoints,setDataPoints] = useState(15);
     const [dr,setdr] = useState(0);
@@ -71,7 +72,12 @@ export default function FwStats(){
             barspass.push(<div className='bar'></div>)
         }
         setpassDp(barspass);
-        console.log(cm);
+        
+        if(dataPoints == 0){
+            setPath("player-rank")
+        } else {
+            setPath("player-position-fw");
+        }
      },[dataPoints]);
 
     useEffect(() => {
@@ -155,13 +161,16 @@ export default function FwStats(){
 
 
     function sendData(){
-        if (dataPoints <= 0){
-            socket.emit("send-data_points_fw",{dr:dr,cm:cm,fin:fin,pr:pr,pass:pass})
+        if (dataPoints == 0){
+            socket.emit("send-data_points_fw",{dr:dr,cm:cm,fin:fin,pr:pr,pass:pass});
+            socket.on("receive_players", (data) => {
+                setPlayers(data);
+            })
+            socket.emit("send_player_data_fw",players);
+        } else {
+            alert("All Data points not used!");
         }
-        socket.on("receive_players", (data) => {
-            setPlayers(data);
-        })
-        socket.emit("send_player_data_fw",players);
+        
 
     }
 
@@ -226,7 +235,7 @@ export default function FwStats(){
                     </div>
             </div>
             <div className="btn-player">
-                <Link to="player-rank" className="link">
+                <Link to={path} className="link">
                     <div className="btn-generate" 
                     onClick={sendData}
                     >Generate Player!</div>

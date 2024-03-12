@@ -8,6 +8,8 @@ import '../styles/mfStats.css'
 const socket = io.connect("http://localhost:3500");
 
 export default function MfStats(){
+    const [path,setPath] = useState("player-position-mf")
+
     const [dataPoints,setDataPoints] = useState(15);
     const [hvp,setHvp] = useState(0);
     const [da,setDa] = useState(0);
@@ -72,7 +74,11 @@ export default function MfStats(){
         }
         setpassvDp(barspassv);
 
-        
+        if(dataPoints == 0){
+            setPath("player-rank");
+        } else {
+            setPath("player-position-mf");
+        }
 
      },[dataPoints]);
 
@@ -157,12 +163,15 @@ export default function MfStats(){
 
     function sendData(){
         if (dataPoints <= 0){
-            socket.emit("send_data_points",{hvp:hvp,da:da,ca:ca,gs:gs,passv:passv})
+            socket.emit("send_data_points",{hvp:hvp,da:da,ca:ca,gs:gs,passv:passv});
+            socket.on("receive_players", (data) => {
+                setPlayers(data);
+            })
+            socket.emit("send_player_data",players);
+        } else {
+            alert("All data points not used");
         }
-        socket.on("receive_players", (data) => {
-            setPlayers(data);
-        })
-        socket.emit("send_player_data",players);
+        
 
     }
     
@@ -229,7 +238,7 @@ export default function MfStats(){
                 
             </div>
             <div className="btn-player">
-                <Link to="player-rank" className="link">
+                <Link to={path} className="link">
                     <div className="btn-generate" 
                     onClick={sendData}
                     >Generate Player!</div>

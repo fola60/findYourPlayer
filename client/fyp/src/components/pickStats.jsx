@@ -35,21 +35,24 @@ export default function PickStats(){
   
    
     function sendData(){
-        console.log("Send data clicked!");
-        console.log(`Pos: ${pos} league: ${league}`);
-        const sendPlayerData = async () => {
-            try {
-                const response = await fetch(`allValue/pos/${pos}/league/${league}`);
-                const result = await response.json();
-                socket.emit("send_players", result);
-                setGet(result)
-                
-            } catch (error) {
-                console.error('Error fetching data ' + error);
+        if(pos != "" && league != null){
+            console.log("Send data clicked!");
+            console.log(`Pos: ${pos} league: ${league}`);
+            const sendPlayerData = async () => {
+                try {
+                    const response = await fetch(`allValue/pos/${pos}/league/${league}`);
+                    const result = await response.json();
+                    socket.emit("send_players", result);
+                    setGet(result)
+                    
+                } catch (error) {
+                    console.error('Error fetching data ' + error);
+                }
             }
+            sendPlayerData();
+        } else {
+            alert("Pick a league and position.");
         }
-        sendPlayerData();
-        
 
     }
     useEffect(() => {
@@ -140,11 +143,11 @@ export default function PickStats(){
 
     useEffect(() => {
         console.log(pos)
-        if(pos == "mf"){
+        if(pos == "mf" && league != null){
             setPath("player-position-mf");
-        } else if(pos == "fw"){
+        } else if(pos == "fw" && league != null){
             setPath("player-position-fw");
-        } else if(pos == "df"){
+        } else if(pos == "df" && league != null){
             setPath("player-position-df");
         }
     },[pos])

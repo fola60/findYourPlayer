@@ -5,12 +5,14 @@
 
 
 
-.container{
+.container-data-page{
     max-height: fit-content;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 
-.data-container{
+.data-container-page{
     display:flex;
     align-items: center;
     justify-content: center;

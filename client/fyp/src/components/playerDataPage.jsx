@@ -39,8 +39,8 @@ export default function PlayerDataPage(props){
 
     return (
         <>
-            <div className='container'>
-                <div className='data-container'>
+            <div className='container-data-page'>
+                <div className='data-container-page'>
                     <Charts data={data}/> 
                 </div>
             </div>

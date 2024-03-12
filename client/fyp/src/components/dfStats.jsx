@@ -9,6 +9,7 @@ const socket = io.connect("http://localhost:3500");
 
 
 export default function DfStats(){
+    const [path,setPath] = useState("player-position-df")
 
     const [dataPoints,setDataPoints] = useState(20);
     const [bpa,setbpa] = useState(0);
@@ -79,7 +80,11 @@ export default function DfStats(){
             barsattabb.push(<div className='bar-df'></div>)
         }
         setattabbDp(barsattabb);
-
+        if(dataPoints == 0){
+            setPath("player-rank");
+        } else {
+            setPath("player-position-df");
+        }
      },[dataPoints]);
 
     useEffect(() => {
@@ -174,13 +179,16 @@ export default function DfStats(){
 
 
     function sendData(){
-        if (dataPoints <= 0){
-            socket.emit("send-data_points_df",{bpa:bpa,da:da,pr:pr,aggr:aggr,passv:passv,aa:attabb})
+        if (dataPoints == 0){
+            socket.emit("send-data_points_df",{bpa:bpa,da:da,pr:pr,aggr:aggr,passv:passv,aa:attabb});
+            socket.on("receive_players", (data) => {
+                setPlayers(data);
+            })
+            socket.emit("send_player_data_df",players);
+        } else {
+            alert("All data points not used!");
         }
-        socket.on("receive_players", (data) => {
-            setPlayers(data);
-        })
-        socket.emit("send_player_data_df",players);
+        
 
     }
 
@@ -256,7 +264,7 @@ export default function DfStats(){
                 
             </div>
             <div className="btn-player">
-                <Link to="player-rank" className="link">
+                <Link to={path} className="link">
                     <div className="btn-generate" 
                     onClick={sendData}
                     >Generate Player!</div>

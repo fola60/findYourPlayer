@@ -29,9 +29,11 @@ export default function Charts(props){
     const [update,setUpdate] = useState(null);
     const [loaded,setLoaded] = useState(0);
     const [name,setName] = useState("Player 1");
-    const [charts,setCharts] = useState(<></>);
+    const [chartIndex,setChartIndex] = useState(0);
+    const [maxIndex,setMaxIndex] = useState(3);
     
-    const [paChartData,setPaChartData] = useState({
+    
+    const [paChartData,setPaChartData] = useState([{
         labels: ['Completed passes ', 'Short Completed pass ', 'Medium Completed pass  ', 'Long Completed pass ', 'Passes Received', 'Progressive Passes Received', 'Key Passes'],
         datasets: [
             {
@@ -50,7 +52,7 @@ export default function Charts(props){
                 borderWidth: 1,
             }
         ]
-    });
+    }]);
     
     const [playerData,setPlayerData] = useState({
         labels:['Passing','Shooting','Defending','Press Resistance', 'dribbling'],
@@ -180,30 +182,261 @@ export default function Charts(props){
                     ],
                 })
             }
-            setPaChartData({
-                labels: ['Completed passes ', 'Short Completed pass ', 'Medium Completed pass  ', 'Long Completed pass ', 'Passes Received', 'Progressive Passes Received', 'Key Passes'],
-                datasets: [
+            if(data.pos == 'MF' || data.pos == 'MF,DF' || data.pos == 'DF,MF' || data.pos == 'MF,FW'){
+                setPaChartData([{
+                    labels: ['Completed passes ', 'Short Completed pass ', 'Medium Completed pass  ', 'Long Completed pass ', 'Passes Received', 'Progressive Passes Received', 'Key Passes'],
+                    datasets: [
+                        {
+                            label: 'Passing Stats',
+                            data: [data.cmp90per,data.sho_cmppctper,data.med_cmppctper,data.lon_cmppctper,data.p_rec90per,data.prg_prec90per,data.kp90per],
+                            backgroundColor:[
+                                'blue',
+                                'green',
+                                'red',
+                                'black',
+                                'orange',
+                                'grey',
+                                'pink'
+                            ],
+                            borderWidth: 1,
+                        }
+                    ]
+                },
+                {
+                    labels: ['Goals','Shot on target %' ,'Goals Per Shot ', 'Xg', 'NpXg ', 'NpXg Per Shot'],
+                    datasets: [
+                        {
+                            label: 'Goal Scoring Stats',
+                            data: [data.gls90per,data.sotpctper,data.g_sh90per,data.xg90per,data.npxg90per,data.npxg_sh90per],
+                            backgroundColor:[
+                                'blue',
+                                'green',
+                                'red',
+                                'black',
+                                'orange',
+                                'grey',
+                                'pink'
+                            ],
+                            borderWidth: 1,
+                        }
+                    ]
+                },
+                {
+                    labels: ['Tackles Won','Challenges Lost' ,'Blocks', 'Interceptions', 'Clearances', 'Shots Blocked'],
+                    datasets: [
+                        {
+                            label: 'Defensive Stats',
+                            data: [data.tkl_w90per,data.chl_lst90per,data.blck90per,data.intc90per,data.clr90per,data.sh_blck90per],
+                            backgroundColor:[
+                                'blue',
+                                'green',
+                                'red',
+                                'black',
+                                'orange',
+                                'grey',
+                                'pink'
+                            ],
+                            borderWidth: 1,
+                        }
+                    ]
+                },
+                {
+                    labels: ['Shot creating actions','Goal Creating Actions' ,'Assists', 'Expected Assits', 'Expected Assisted Goals', 'Key Passes'],
+                    datasets: [
+                        {
+                            label: 'Creative Stats',
+                            data: [data.sca_p90per,data.gca_90per,data.ast90per,data.xa90per,data.xag90per,data.kp90per],
+                            backgroundColor:[
+                                'blue',
+                                'green',
+                                'red',
+                                'black',
+                                'orange',
+                                'grey',
+                                'pink'
+                            ],
+                            borderWidth: 1,
+                        }
+                    ]
+                }
+                
+            ]
+                )
+            } else if(data.pos == 'DF' || data.pos == 'DF,MF' || data.pos == 'DF,FW'){
+                setPaChartData([
                     {
-                        label: 'Passing Stats',
-                        data: [data.cmp90per,data.sho_cmppctper,data.med_cmppctper,data.lon_cmppctper,data.p_rec90per,data.prg_prec90per,data.kp90per],
-                        //data: [0,0,0,0,0,0,0],
-                        backgroundColor:[
-                            'blue',
-                            'green',
-                            'red',
-                            'black',
-                            'orange',
-                            'grey',
-                            'pink'
-                        ],
-                        borderWidth: 1,
+                        labels: ['Completed passes ', 'Short Completed pass ', 'Medium Completed pass  ', 'Long Completed pass ', 'Passes Received', 'Progressive Passes Received', 'Key Passes'],
+                        datasets: [
+                            {
+                                label: 'Passing Stats',
+                                data: [data.cmp90per,data.sho_cmppctper,data.med_cmppctper,data.lon_cmppctper,data.p_rec90per,data.prg_prec90per,data.kp90per],
+                                backgroundColor:[
+                                    'blue',
+                                    'green',
+                                    'red',
+                                    'black',
+                                    'orange',
+                                    'grey',
+                                    'pink'
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
+                    },
+                    {
+                        labels: ['NpXg ', 'Shot On Target % ', 'Shot Creating Actions ', 'SCA Per Take on ', 'Crosses into penalty area'],
+                        datasets: [
+                            {
+                                label: 'Attacking Stats',
+                                data: [data.npxg90per,data.sotpctper,data.sca_p90per,data.sca_to90per,data.crrs_pen90per],
+                                backgroundColor:[
+                                    'blue',
+                                    'green',
+                                    'red',
+                                    'black',
+                                    'orange',
+                                    'grey',
+                                    'pink'
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
+                    },
+                    {
+                        labels: ['Tackles Won','Challenges Lost' ,'Blocks', 'Interceptions', 'Clearances', 'Shots Blocked'],
+                        datasets: [
+                            {
+                                label: 'Defensive Stats',
+                                data: [data.tkl_w90per,data.chl_lst90per,data.blck90per,data.intc90per,data.clr90per,data.sh_blck90per],
+                                backgroundColor:[
+                                    'blue',
+                                    'green',
+                                    'red',
+                                    'black',
+                                    'orange',
+                                    'grey',
+                                    'pink'
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
+                    },
+                    {
+                        labels: ['Short Completion','Dispossesions' ,'Miscontrolls', 'Take ons Tackled'],
+                        datasets: [
+                            {
+                                label: 'Defensive Stats',
+                                data: [data.sho_cmppctper,data.dis90per,data.mis90per,data.to_tklpctper],
+                                backgroundColor:[
+                                    'blue',
+                                    'green',
+                                    'red',
+                                    'black',
+                                    'orange',
+                                    'grey',
+                                    'pink'
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
                     }
-                ]
-            })
-            
+
+                ])
+            } else if (data.pos == 'FW' || data.pos == 'FW,MF' || data.pos == 'FW,DF'){
+                setPaChartData([
+                    {
+                        labels: ['Shot creating actions','Goal Creating Actions' ,'Assists', 'Expected Assits', 'Expected Assisted Goals', 'Key Passes'],
+                        datasets: [
+                            {
+                                label: 'Creative Stats',
+                                data: [data.sca_p90per,data.gca_90per,data.ast90per,data.xa90per,data.xag90per,data.kp90per],
+                                backgroundColor:[
+                                    'blue',
+                                    'green',
+                                    'red',
+                                    'black',
+                                    'orange',
+                                    'grey',
+                                    'pink'
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
+                    },
+                    {
+                        labels: ['Shot creating actions Take ons','Goal Creating Actions' ,'Goal Creating Actions Take ons', 'Carries', 'Carries into final 3rdd', 'Take on succes rate'],
+                        datasets: [
+                            {
+                                label: 'Dribbling Stats',
+                                data: [data.sca_to90per,data.gca_90per,data.gca_to90per,data.crrs90per,data.crrs_fin3rd90per,data.to_att90],
+                                backgroundColor:[
+                                    'blue',
+                                    'green',
+                                    'red',
+                                    'black',
+                                    'orange',
+                                    'grey',
+                                    'pink'
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
+                    },
+                    {
+                        labels: ['Goals','Shot on target %' ,'Goals Per Shot ', 'Xg', 'NpXg ', 'NpXg Per Shot'],
+                        datasets: [
+                            {
+                                label: 'Goal Scoring Stats',
+                                data: [data.gls90per,data.sotpctper,data.g_sh90per,data.xg90per,data.npxg90per,data.npxg_sh90per],
+                                backgroundColor:[
+                                    'blue',
+                                    'green',
+                                    'red',
+                                    'black',
+                                    'orange',
+                                    'grey',
+                                    'pink'
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
+                    },
+                    {
+                        labels: ['Shots from turnovers','interceptions' ,'Tackles Attacking 3rd'],
+                        datasets: [
+                            {
+                                label: 'Goal Scoring Stats',
+                                data: [data.sca_def90per,data.intc90per,data.tkl_att3rd90per],
+                                backgroundColor:[
+                                    'blue',
+                                    'green',
+                                    'red',
+                                    'black',
+                                    'orange',
+                                    'grey',
+                                    'pink'
+                                ],
+                                borderWidth: 1,
+                            }
+                        ]
+                    }
+
+                ])
+            }
         }
     },[update])
     
+
+    function forwardChart(){
+        if(chartIndex < maxIndex){
+            setChartIndex(chartIndex + 1);
+        }
+    }
+    function backChart(){
+        if(chartIndex != 0){
+            setChartIndex(chartIndex - 1);
+        }
+    }
 
     return (
         <>  
@@ -221,15 +454,13 @@ export default function Charts(props){
                     options= {options}
                     />
                 </div>
-                <div className="charts-container">
-                    <div className="chart">
-                        {data ? <PolarArea data={paChartData} options={optionsPolar}/> : ""}
-                    </div>
-                    <div className="chart"></div>
-                    <div className="chart"></div>
-                    <div className="chart"></div>
-                    <div className="chart"></div>
-                    <div className="chart"></div>
+                <div className="index-chart">{chartIndex + 1}/4 Click arrows to see next...</div>
+                <div className="chart">
+                    <div className="btn-chart" onClick={backChart}>{'<'}</div>
+                        <div className="polar-chart">
+                            <PolarArea data={paChartData[chartIndex]} options={optionsPolar}/>
+                        </div>
+                    <div className="btn-chart" onClick={forwardChart}> {'>'} </div>
                 </div>
             </div>
         </>
