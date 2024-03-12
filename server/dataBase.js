@@ -1,11 +1,11 @@
 const Pool = require('pg').Pool;
 
 const pool= new Pool({
-    host: "localhost",
-    user: "postgres",
+    host: "findyourplayer-db.c5cg68esmfdc.eu-north-1.rds.amazonaws.com",
+    user: "fola",
     port: 5432,
-    password:"sarah2014",
-    database: "top5playerdata",
+    password:"Folasgmailaccount123!",
+    database: "FindYourPlayer",
     idleTimeoutMillis: 20000,
     connectionTimeoutMillis: 20000,
 });
