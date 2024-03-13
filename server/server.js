@@ -7,10 +7,12 @@ const cors = require("cors")
 
 app.use(cors());
 const serverS = http.createServer(app);
+const PORT = 5000;
+const IP_ADDRESS = '13.51.64.208';
 
 const io = new Server(serverS, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: IP_ADDRESS,
         methods: ["GET", "POST"]
     }
 });
@@ -115,8 +117,8 @@ io.on("connection", (socket) => {
 
 })
 
-serverS.listen(3500, () => {
-    console.log("socket started on port 3500");
+serverS.listen(PORT, () => {
+    console.log("socket started on port " + PORT);
 });
 
 app.use(express.json());
@@ -454,7 +456,7 @@ app.get("/getId", async (req,res) => {
     }
 })
 
-app.listen(5000, () =>{
+app.listen(PORT,IP_ADDRESS, () =>{
     console.log("Server started on port 5000")
 });
 
