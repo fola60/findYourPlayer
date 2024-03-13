@@ -456,7 +456,8 @@ app.get("/getId", async (req,res) => {
     }
 })
 
-app.listen(PORT,IP_ADDRESS, () =>{
+app.listen(PORT, () =>{
     console.log("Server started on port 5000")
+
 });
 
