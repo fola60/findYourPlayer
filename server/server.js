@@ -8,7 +8,7 @@ const cors = require("cors")
 app.use(cors());
 const serverS = http.createServer(app);
 const PORT = 5000;
-const IP_ADDRESS = '51.20.34.230';
+const IP_ADDRESS = '51.20.192.221';
 
 const io = new Server(serverS, {
     cors: {
