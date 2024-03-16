@@ -7,13 +7,12 @@ const cors = require("cors")
 
 app.use(cors());
 const serverS = http.createServer(app);
-const PORT = 1357;
-// const IP_ADDRESS = '13.48.124.9';
-const IP_ADDRESS = 'http://localhost:1357'
+const PORT = 5001;
+const IP_ADDRESS = '13.48.124.9';
 
 const io = new Server(serverS, {
     cors: {
-        origin: IP_ADDRESS,
+        origin: `http://${IP_ADDRESS}:${PORT}`,
         methods: ["GET", "POST"]
     }
 });
