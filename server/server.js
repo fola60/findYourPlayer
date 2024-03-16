@@ -9,7 +9,7 @@ app.use(cors());
 const serverS = http.createServer(app);
 const PORT = 1357;
 // const IP_ADDRESS = '13.48.124.9';
-const IP_ADDRESS = 'http://localhost:'
+const IP_ADDRESS = 'http://localhost:1357'
 
 const io = new Server(serverS, {
     cors: {
@@ -457,7 +457,7 @@ app.get("/getId", async (req,res) => {
     }
 })
 
-app.listen(PORT,IP_ADDRESS, () =>{
+app.listen(PORT, () =>{
     console.log("Server started on port 5000");
 
 });
