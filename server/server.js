@@ -8,11 +8,12 @@ const cors = require("cors")
 app.use(cors());
 const serverS = http.createServer(app);
 const PORT = 5001;
+const PORTIO = 5002;
 const IP_ADDRESS = '13.48.124.9';
 
 const io = new Server(serverS, {
     cors: {
-        origin: `http://${IP_ADDRESS}:${PORT}`,
+        origin: `http://${IP_ADDRESS}:${PORTIO}`,
         methods: ["GET", "POST"]
     }
 });
@@ -457,7 +458,7 @@ app.get("/getId", async (req,res) => {
 })
 
 app.listen(PORT, () =>{
-    console.log("Server started on port 5000");
+    console.log("Server started on port "+PORT);
 
 });
 
