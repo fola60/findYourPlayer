@@ -13,7 +13,7 @@ const IP_ADDRESS = '13.48.124.9';
 
 const io = new Server(serverS, {
     cors: {
-        origin: `http://localhost:${PORTIO}`,
+        origin: '*',
         methods: ["GET", "POST"]
     }
 });
@@ -119,7 +119,7 @@ io.on("connection", (socket) => {
 })
 
 serverS.listen(PORTIO, () => {
-    console.log("socket started on port " + PORT);
+    console.log("socket started on port " + PORTIO);
 });
 
 app.use(express.json());
