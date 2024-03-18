@@ -13,7 +13,7 @@ const IP_ADDRESS = '13.48.124.9';
 
 const io = new Server(serverS, {
     cors: {
-        origin: `http://${IP_ADDRESS}:${PORTIO}`,
+        origin: `http://localhost:${PORTIO}`,
         methods: ["GET", "POST"]
     }
 });
