@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import io from 'socket.io-client'
 
 
-const socket = io.connect("http://localhost:3500");
+const socket = io.connect("http://13.48.124.9:5002"");
 
 export default function PlayerDataPage(props){
     const [data,setData] = useState(null)
