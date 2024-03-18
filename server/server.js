@@ -6,6 +6,18 @@ const https = require("https");
 const { Server } = require("socket.io");
 const cors = require("cors");
 
+const http = require('http');
+
+const httpServer = http.createServer((req, res) => {
+  res.writeHead(301, { Location: 'https://' + req.headers.host + req.url });
+  res.end();
+});
+
+httpServer.listen(80, () => {
+  console.log('HTTP server running on port 80 (redirecting to HTTPS)');
+});
+
+
 const privateKey = fs.readFileSync('server.key', 'utf8');
 const certificate = fs.readFileSync('server.cert', 'utf8');
 
