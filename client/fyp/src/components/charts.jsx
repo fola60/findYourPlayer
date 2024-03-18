@@ -442,9 +442,9 @@ export default function Charts(props){
         <>  
             <div className="chart-container">
                 <div className="header-chart">
-                    <Link to="/" >
+                    <Link to="/" className="link-logo">
                         <div className='logo-fyp'>
-                                <img src={logo} className='logo'/>
+                                FindYourPlayer
                         </div>
                     </Link>
                 </div>
