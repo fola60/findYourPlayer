@@ -1,12 +1,12 @@
 const express = require('express')
 const app = express();
 const pool = require("./dataBase")
-const http = require("https")
+const https = require("https")
 const { Server } = require("socket.io")
 const cors = require("cors")
 
 app.use(cors());
-const serverS = http.createServer(app);
+const serverS = https.createServer(app);
 const PORT = 5001;
 const PORTIO = 5002;
 
