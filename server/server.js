@@ -118,7 +118,7 @@ io.on("connection", (socket) => {
 
 })
 
-serverS.listen(PORT, () => {
+serverS.listen(PORTIO, () => {
     console.log("socket started on port " + PORT);
 });
 
