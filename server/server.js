@@ -17,14 +17,13 @@ const certificate = fs.readFileSync('./server.cert', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
 app.use(cors());
-//app.use(morgan("dev"));
+app.use(morgan("dev"));
 
 const serverS = https.createServer(credentials,app);
-const serverIO = https.createServer(app);
 const PORT = 5001;
 const PORTIO = 5002;
 
-const io = new Server(serverIO, {
+const io = new Server(serverS, {
     cors: {
         origin: '*',
         methods: ["GET", "POST"]
