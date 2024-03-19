@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import { Link } from 'react-router-dom'
 import '../styles/posPick.css'
 
-const socket = io.connect("https://13.48.124.9:5002");
+const socket = io.connect("http://13.48.124.9:5002");
 
 export default function PosPick(){
     const [pos,setPos] = useState("");

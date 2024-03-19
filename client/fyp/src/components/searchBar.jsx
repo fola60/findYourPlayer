@@ -6,7 +6,7 @@ import io from 'socket.io-client'
 import uuid from 'react-uuid'
 import logo from '../img/logo-fyp.png'
 
-const socket = io.connect("https://13.48.124.9:5002");
+const socket = io.connect("http://13.48.124.9:5002");
 
 
 
