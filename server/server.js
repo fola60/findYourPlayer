@@ -20,10 +20,11 @@ app.use(cors());
 //app.use(morgan("dev"));
 
 const serverS = https.createServer(credentials,app);
+const serverIO = https.createServer(app);
 const PORT = 5001;
 const PORTIO = 5002;
 
-const io = new Server(serverS, {
+const io = new Server(serverIO, {
     cors: {
         origin: '*',
         methods: ["GET", "POST"]
