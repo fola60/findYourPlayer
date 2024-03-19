@@ -469,7 +469,7 @@ app.get("/getId", async (req,res) => {
     }
 })
 
-app.listen(PORT, () =>{
+serverS.listen(PORT, () =>{
     console.log("Server started on port "+PORT);
 
 });
