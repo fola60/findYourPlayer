@@ -17,7 +17,7 @@ const certificate = fs.readFileSync('./server.cert', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
 app.use(cors());
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 
 const serverS = https.createServer(credentials,app);
 const PORT = 5001;
