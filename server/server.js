@@ -11,15 +11,12 @@ const morgan = require('morgan');
 
 
 
-const privateKey = fs.readFileSync('./server.key', 'utf8');
-const certificate = fs.readFileSync('./server.cert', 'utf8');
 
-const credentials = { key: privateKey, cert: certificate };
 
 app.use(cors());
 app.use(morgan("dev"));
 
-const serverS = https.createServer(credentials,app);
+const serverS = https.createServer(app);
 const PORT = 5001;
 const PORTIO = 5002;
 
