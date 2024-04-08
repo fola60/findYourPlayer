@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 import { Link } from 'react-router-dom'
 import uuid from 'react-uuid'
 
-const socket = io.connect("https://13.48.124.9:5002");
+const socket = io.connect("https://13.48.124.9:80");
 
 export default function PlayerRank(){
     const [playerRanked,setPlayerRanked] = useState([]);

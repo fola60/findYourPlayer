@@ -1,7 +1,7 @@
 {
   "name": "fyp",
   "version": "0.1.0",
-  "proxy": "https://13.48.124.9:5001",
+  "proxy": "http://13.48.124.9:5001",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
