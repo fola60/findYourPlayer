@@ -11,11 +11,16 @@ export default function PlayerDataPage(props){
     const [data,setData] = useState(null)
     const [id,setId] = useState(1);
     useEffect(() =>{
-        socket.on("receive_id", (data) => {
-            setId(data.id);
-            
-        })
-        
+        setTimeout(() => {
+            socket.on("receive_id", (data) => {
+                setId(data.id);
+            });
+        },1000);
+        setTimeout(() => {
+            socket.on("receive_id", (data) => {
+                setId(data.id);
+            });
+        },2000);
     }, [socket]);
     
     
