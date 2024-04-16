@@ -35,19 +35,19 @@ io.on("connection", (socket) => {
     let fwBool = false;
     let dfBool = false;
     socket.on("send_id", (data) => {
-        socket.emit("receive_id", data);
+        socket.broadcast.emit("receive_id", data);
         console.log("received id : " + data.id);
     });
     socket.on("send_league", (data) => { 
-        socket.emit("received_league", data);
+        socket.broadcast.emit("received_league", data);
         console.log("received league : " + data);
     });
     socket.on("send_position", (data) => {
-        socket.emit("received_position", data);
+        socket.broadcast.emit("received_position", data);
         console.log("received position", data);
     });
     socket.on("send_data_points",(data) => {
-        socket.emit("receive_data_points",data);
+        socket.broadcast.emit("receive_data_points",data);
         dataPoints = data;
         console.log("received data points! :", dataPoints);
         mfBool = true;
@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
         fwBool = false;
     });
     socket.on("send-data_points_fw", (data) => {
-        socket.emit("receive_data_points_fw",data);
+        socket.broadcast.emit("receive_data_points_fw",data);
         dataPointsFw = data;
         console.log("received data points Forward! :", dataPointsFw);
         fwBool = true;
@@ -63,7 +63,7 @@ io.on("connection", (socket) => {
         dfBool = false;
     })
     socket.on("send-data_points_df", (data) => {
-        socket.emit("receive_data_points_df",data);
+        socket.broadcast.emit("receive_data_points_df",data);
         dataPointsDf = data;
         console.log("received data points Defender! :", dataPointsDf);
         dfBool = true;
@@ -71,7 +71,7 @@ io.on("connection", (socket) => {
         fwBool = false;
     })
     socket.on("send_players",(data) => {
-        socket.emit("receive_players",data);
+        socket.broadcast.emit("receive_players",data);
         console.log("received player: " + data[0].player);
     })
     socket.on("send_player_data",(data) =>{
@@ -81,7 +81,7 @@ io.on("connection", (socket) => {
                 data[i].score = (data[i].mf_hvp * dataPoints.hvp) + (data[i].mf_da * dataPoints.da) + (data[i].mf_ca * dataPoints.ca) + (data[i].mf_gs * dataPoints.gs) + (data[i].mf_br  * dataPoints.br);
             }
             data.sort((a,b) => b.score - a.score);
-            socket.emit("receive_sorted_player", data.slice(0,50));
+            socket.broadcast.emit("receive_sorted_player", data.slice(0,50));
             console.log(data);
             
             console.log("Player received!");
@@ -90,7 +90,7 @@ io.on("connection", (socket) => {
             fwBool = false;
         }
 
-        socket.emit("receive_sorted_player", null);
+        socket.broadcast.emit("receive_sorted_player", null);
     });
     socket.on("send_player_data_fw", (data) => {
         if(fwBool && data){
@@ -98,7 +98,7 @@ io.on("connection", (socket) => {
                 data[i].score = (data[i].fw_pr * dataPointsFw.pr) + (data[i].fw_fin * dataPointsFw.fin) + (data[i].fw_dr * dataPointsFw.dr) + (data[i].fw_cm * dataPointsFw.cm) + (data[i].fw_pass * dataPointsFw.pass);
             }
             data.sort((a,b) => b.score - a.score);
-            socket.emit("receive_sorted_player_fw", data.slice(0,50));
+            socket.broadcast.emit("receive_sorted_player_fw", data.slice(0,50));
             
             console.log("Player received!");
             fwBool = false;
@@ -114,7 +114,7 @@ io.on("connection", (socket) => {
                 data[i].score = (data[i].df_aggr * dataPointsDf.aggr) + (data[i].df_bpa * dataPointsDf.bpa) + (data[i].df_passv * dataPointsDf.passv) + (data[i].df_aa * dataPointsDf.aa) + (data[i].df_da * dataPointsDf.da) + (data[i].df_pr * dataPointsDf.pr);
             }
             data.sort((a,b) => b.score - a.score);
-            socket.emit("receive_sorted_player_df", data.slice(0,50));
+            socket.broadcast.emit("receive_sorted_player_df", data.slice(0,50));
             
             console.log("Player received!");
             fwBool = false;
