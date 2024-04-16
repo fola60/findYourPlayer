@@ -18,7 +18,7 @@ app.use(morgan("dev"));
 
 const serverS = http.createServer(app);
 const PORT = 5001;
-const PORTIO = 80;
+const PORTIO = 8080;
 
 const io = new Server(serverS, {
     cors: {
