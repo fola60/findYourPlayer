@@ -138,7 +138,7 @@ export default function Charts(props){
  
     
     useEffect(() => {
-        if (loaded > 1){
+        if (loaded >= 1){
             setName(data.player)
             if(data.pos == 'MF' || data.pos == 'MF,DF' || data.pos == 'DF,MF' || data.pos == 'MF,FW'){
                 setPlayerData({
