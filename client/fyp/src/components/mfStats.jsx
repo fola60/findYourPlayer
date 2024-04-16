@@ -5,7 +5,7 @@ import io from 'socket.io-client'
 import { useEffect, useState } from 'react'
 import '../styles/mfStats.css'
 
-const socket = io.connect("http://13.48.124.9:80");
+const socket = io.connect("http://13.48.124.9:8080");
 
 export default function MfStats(){
     const [path,setPath] = useState("player-position-mf")

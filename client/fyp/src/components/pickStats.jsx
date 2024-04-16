@@ -13,7 +13,7 @@ import lewandowski from '../img/lewandowski.png'
 import kroos from '../img/kroos.png'
 import kim from '../img/kimMinJae.png'
 
-const socket = io.connect("http://13.48.124.9:80");
+const socket = io.connect("http://13.48.124.9:8080");
 
 export default function PickStats(){
     const linkRef = useRef(null);
