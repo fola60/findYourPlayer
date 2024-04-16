@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const pool = require("./dataBase");
 const fs = require('fs');
-const https = require("https");
+const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const morgan = require('morgan');
@@ -16,7 +16,7 @@ const morgan = require('morgan');
 app.use(cors());
 app.use(morgan("dev"));
 
-const serverS = https.createServer(app);
+const serverS = http.createServer(app);
 const PORT = 5001;
 const PORTIO = 80;
 
