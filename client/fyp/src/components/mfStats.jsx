@@ -145,6 +145,7 @@ export default function MfStats(){
             setpassv(passv + 1);
             setDataPoints(dataPoints - 1);
         }
+        
     }
     function decrementpassv(){
         if(passv > 0) {
@@ -158,8 +159,8 @@ export default function MfStats(){
     function sendData(){
         if (dataPoints <= 0){
             let playerDataCpy = playerList;
-            for (let i = 0;i < data.length; i++){
-                playerDataCpy[i].score = (playerDataCpy[i].mf_hvp * hvp) + (playerDataCpy[i].mf_da * da) + (playerDataCpy[i].mf_ca * ca) + (playerDataCpy[i].mf_gs * gs) + (playerDataCpy[i].mf_br  * br);
+            for (let i = 0;i < playerDataCpy.length; i++){
+                playerDataCpy[i].score = (playerDataCpy[i].mf_hvp * hvp) + (playerDataCpy[i].mf_da * da) + (playerDataCpy[i].mf_ca * ca) + (playerDataCpy[i].mf_gs * gs) + (playerDataCpy[i].mf_br  * passv);
             }
             playerDataCpy.sort((a,b) => b.score - a.score);
             setPlayerList(playerDataCpy.slice(0,50));

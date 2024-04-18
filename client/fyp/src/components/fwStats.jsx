@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import '../styles/fwStats.css'
 import io from 'socket.io-client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState ,useContext} from 'react'
 
 import { PlayerData } from '../App'
 
@@ -159,7 +159,7 @@ export default function FwStats(){
     function sendData(){
         if (dataPoints == 0){
             let playerListCpy = playerList;
-            for(let i = 0;i < data.length; i++){
+            for(let i = 0;i < playerListCpy.length; i++){
                 playerListCpy[i].score = (playerListCpy[i].fw_pr * pr) + (playerListCpy[i].fw_fin * fin) + (playerListCpy[i].fw_dr * dr) + (playerListCpy[i].fw_cm * cm) + (playerListCpy[i].fw_pass * pass);
             }
             playerListCpy.sort((a,b) => b.score - a.score);

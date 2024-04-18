@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import React, { useContext } from 'react'
 import '../styles/dfStats.css'
 import io from 'socket.io-client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import { PlayerData } from '../App'
 
 
@@ -178,7 +178,7 @@ export default function DfStats(){
         if (dataPoints == 0){
             let PlayerListCpy = playerList;
             for(let i = 0;i < PlayerListCpy.length; i++){
-                PlayerListCpy[i].score = (PlayerListCpy[i].df_aggr * aggr) + (PlayerListCpy[i].df_bpa * bpa) + (PlayerListCpy[i].df_passv * passv) + (PlayerListCpy[i].df_aa * aa) + (PlayerListCpy[i].df_da * da) + (PlayerListCpy[i].df_pr * pr);
+                PlayerListCpy[i].score = (PlayerListCpy[i].df_aggr * aggr) + (PlayerListCpy[i].df_bpa * bpa) + (PlayerListCpy[i].df_passv * passv) + (PlayerListCpy[i].df_aa * attabb) + (PlayerListCpy[i].df_da * da) + (PlayerListCpy[i].df_pr * pr);
             }
             PlayerListCpy.sort((a,b) => b.score - a.score);
             setPlayerList(PlayerListCpy.slice(0,50))
