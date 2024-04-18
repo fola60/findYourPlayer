@@ -1,6 +1,15 @@
-// import React from 'react'; 
-  
-// const UserContext =React.createContext(); 
+import React, { createContext, useState } from 'react';
 
-// export const PlayerId = UserContext.PlayerId;
-// export const PlayerData = UserContext.PlayerData;
+export const DataContext = createContext();
+
+export const DataProvider = ({ children }) => {
+  
+  const [playerList,setPlayerList] = useState({});
+
+  return (
+    <DataContext.Provider value={{ playerId, setPlayerId }}>
+      {children}
+    </DataContext.Provider>
+  );
+};
+

@@ -12,7 +12,7 @@ const socket = io.connect("http:/16.170.183.94:8080");
 
 
 export default function SearchBar(props){
-    const {playerId,setPlayerId} = useContext(PlayerData);
+    const {setPlayerId} = useContext(PlayerData);
     const [input,setInput] = useState("");
     const [info,setInfo] = useState([])
     function sendId(id){

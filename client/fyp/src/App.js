@@ -12,47 +12,56 @@ import PickStats from './components/pickStats.jsx'
 
 export const PlayerData = createContext(null);
 
-export default function App() {
-const [playerId,setPlayerId] = useState(1)
 
+export const DataProvider = ({ children }) => {
+  const [playerId,setPlayerId] = useState(1);
+  const [playerList,setPlayerList] = useState({});
   useEffect(() => {
     console.log("YIPPEEE!!");
   },[playerId]);
+
+  return (
+    <PlayerData.Provider value={{ playerId, setPlayerId,playerList,setPlayerList }}>
+      {children}
+    </PlayerData.Provider>
+  );
+};
+
+export default function App() {
+
   
   return (
     <>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-          <PlayerData.Provider value={{playerId, setPlayerId}}>
-              <LandingPage/>
-            </PlayerData.Provider>
-          </Route>
-          <Route exact path="/player-chart">
-              <PlayerDataPage />
-          </Route>
-          <Route exact path="/player-league">
-            <PickStats/>
-          </Route>
-          <Route exact path="/player-position">
-            <PosPick/>
-          </Route>
-          <Route exact path="/player-position-df">
-            <DfStats/>
-          </Route>
-          <Route exact path="/player-position-mf">
-            <MfStats/>
-          </Route>
-          <Route exact path="/player-position-fw">
-            <FwStats/>
-          </Route>
-          <Route exact path="/player-rank">
-            <PlayerData.Provider value={{playerId, setPlayerId}}>
+      <DataProvider>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+                <LandingPage/>
+            </Route>
+            <Route exact path="/player-chart">
+                <PlayerDataPage />
+            </Route>
+            <Route exact path="/player-league">
+              <PickStats/>
+            </Route>
+            <Route exact path="/player-position">
+              <PosPick/>
+            </Route>
+            <Route exact path="/player-position-df">
+              <DfStats/>
+            </Route>
+            <Route exact path="/player-position-mf">
+              <MfStats/>
+            </Route>
+            <Route exact path="/player-position-fw">
+              <FwStats/>
+            </Route>
+            <Route exact path="/player-rank">
               <PlayerRanks/>
-            </PlayerData.Provider>
-          </Route>
-        </Switch>
-      </Router>
+            </Route>
+          </Switch>
+        </Router>
+      </DataProvider>
     </>
   )
 }
