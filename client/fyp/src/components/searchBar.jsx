@@ -7,7 +7,7 @@ import uuid from 'react-uuid'
 import logo from '../img/logo-fyp.png'
 import { PlayerData } from '../App'
 
-const socket = io.connect("http:/16.170.183.94:8080");
+
 
 
 
@@ -15,9 +15,7 @@ export default function SearchBar(props){
     const {setPlayerId} = useContext(PlayerData);
     const [input,setInput] = useState("");
     const [info,setInfo] = useState([])
-    function sendId(id){
-        socket.emit("send_id", {id: (id)})
-    }
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -63,7 +61,6 @@ export default function SearchBar(props){
                                         className="results"  
                                         key={uuid} 
                                         onClick={()=>{
-                                            sendId(result.id)
                                             console.log(result.id)
                                             setPlayerId(result.id);
                                         }}>

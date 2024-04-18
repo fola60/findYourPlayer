@@ -3,22 +3,13 @@ import  './charts.jsx'
 import Charts from './charts.jsx'
 import { useEffect, useState, createContext,useContext} from 'react';
 import io from 'socket.io-client'
-import { PlayerData } from '../App.js';
+import { PlayerData } from '../App';
 
-const socket = io.connect("http://16.170.183.94:8080");
 
 export default function PlayerDataPage(){
-    const {playerId,setPlayerId} = useContext(PlayerData);
+    const {playerId} = useContext(PlayerData);
     const [data,setData] = useState(null)
-    const [id,setId] = useState(1);
-    useEffect(() =>{
-        
-        socket.on("receive_id", (data) => {
-            setId(data.id);
-            
-        })
-        
-    }, [socket]);
+    
     
     
 

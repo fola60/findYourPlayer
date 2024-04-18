@@ -10,7 +10,7 @@ import FwStats from './components/fwStats.jsx'
 import PlayerRanks from './components/playerRanks.jsx'
 import PickStats from './components/pickStats.jsx'
 
-export const PlayerData = createContext(null);
+export const PlayerData = createContext(1);
 
 
 export const DataProvider = ({ children }) => {
