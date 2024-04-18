@@ -26,7 +26,7 @@ export default function PlayerDataPage(){
             }
         }
         getData();
-        console.log("Id: " + id);
+        
     },[playerId]);
     
 
