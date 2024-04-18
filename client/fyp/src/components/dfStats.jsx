@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import React, { useContext } from 'react'
 import '../styles/dfStats.css'
-import io from 'socket.io-client'
-import { useEffect, useState,useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { PlayerData } from '../App'
 
 

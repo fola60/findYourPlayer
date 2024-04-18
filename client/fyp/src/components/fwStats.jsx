@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
 import '../styles/fwStats.css'
-import io from 'socket.io-client'
 import { useEffect, useState ,useContext} from 'react'
 
 import { PlayerData } from '../App'
