@@ -1,52 +1,19 @@
 import '../styles/playerRanks.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect,useContext } from 'react'
 import io from 'socket.io-client'
 import { Link } from 'react-router-dom'
 import uuid from 'react-uuid'
+import { PlayerData } from '../App'
 
 const socket = io.connect("http://16.170.183.94:8080");
 
 export default function PlayerRank(){
-    const [playerRanked,setPlayerRanked] = useState([]);
-    const [message,setMessage] = useState("No Message");
+    const {playerList,setPlayerId} = useContext(PlayerData);
+
     
 
-
-    useEffect(() =>{
-        socket.on(`receive_sorted_player`,(data) =>{
-            if(data){
-                setPlayerRanked(data);
-            } else {
-                setMessage("Mf Failed!");
-            }
-        })
-        socket.on("receive_sorted_player_fw", (data) =>{
-            if(data){
-                setPlayerRanked(data);
-            } else {
-                setMessage("Fw Failed!");
-            }
-        })
-        socket.on("receive_sorted_player_df", (data) =>{
-            if(data){
-                setPlayerRanked(data);
-            } else {
-                setMessage("Df Failed!");
-            }
-        })
-    },[socket]);
-
-    useEffect(() => {
-        console.log(playerRanked)
-    },[playerRanked]);
-
-    useEffect(() => {
-        console.log(message)
-    },[message]);
-
     function sendId(id){
-        console.log("Ranked id: " + id);
-        socket.emit("send_id", {id: (id)})
+        setPlayerId(id);
     }
 
     return (
@@ -58,7 +25,7 @@ export default function PlayerRank(){
                 <div className="data">
                     <div className="player-ranked-container">
                         {
-                            playerRanked.map((result,id) => {
+                            playerList.map((result,id) => {
                                 return (
                                     <>
                                         <div className="player-stats" key={uuid} >

@@ -4,11 +4,15 @@ import '../styles/fwStats.css'
 import io from 'socket.io-client'
 import { useEffect, useState } from 'react'
 
-const socket = io.connect("http://16.170.183.94:8080");
+import { PlayerData } from '../App'
 
 
 
 export default function FwStats(){
+    const {playerList,setPlayerList} = useContext(PlayerData);
+
+
+
     const [path,setPath] = useState("player-position-fw");
 
     const [dataPoints,setDataPoints] = useState(15);
@@ -80,15 +84,7 @@ export default function FwStats(){
         }
      },[dataPoints]);
 
-    useEffect(() => {
-        socket.on("receive_players", (data) => {
-            setPlayers(data);
-        });
-    },[socket]);
-    
-    useEffect(() =>{
-        console.log("socket Triggered data:" + players);
-    },[players]);
+   
 
 
     function incrementdr(){
@@ -162,11 +158,12 @@ export default function FwStats(){
 
     function sendData(){
         if (dataPoints == 0){
-            socket.emit("send-data_points_fw",{dr:dr,cm:cm,fin:fin,pr:pr,pass:pass});
-            socket.on("receive_players", (data) => {
-                setPlayers(data);
-            })
-            socket.emit("send_player_data_fw",players);
+            let playerListCpy = playerList;
+            for(let i = 0;i < data.length; i++){
+                playerListCpy[i].score = (playerListCpy[i].fw_pr * pr) + (playerListCpy[i].fw_fin * fin) + (playerListCpy[i].fw_dr * dr) + (playerListCpy[i].fw_cm * cm) + (playerListCpy[i].fw_pass * pass);
+            }
+            playerListCpy.sort((a,b) => b.score - a.score);
+            setPlayerList(playerListCpy.slice(0,50));
         } else {
             alert("All Data points not used!");
         }

@@ -4,10 +4,14 @@ import '../styles/pickStats.css'
 import io from 'socket.io-client'
 import { useEffect, useState } from 'react'
 import '../styles/mfStats.css'
+import { PlayerData } from '../App'
 
-const socket = io.connect("http://16.170.183.94:8080");
+
 
 export default function MfStats(){
+    const {playerList,setPlayerList} = useContext(PlayerData);
+
+
     const [path,setPath] = useState("player-position-mf")
 
     const [dataPoints,setDataPoints] = useState(15);
@@ -25,7 +29,6 @@ export default function MfStats(){
     const [passvDp,setpassvDp] = useState([]);
     
     
-    const [players,setPlayers] = useState(null);
     const [bar,setBar] = useState([<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,<div className='bar'></div>,]);
 
 
@@ -82,16 +85,7 @@ export default function MfStats(){
 
      },[dataPoints]);
 
-    useEffect(() => {
-        socket.on("receive_players", (data) => {
-            setPlayers(data);
-        });
-    },[socket]);
     
-    useEffect(() =>{
-        console.log("socket Triggered data:" + players);
-    },[players]);
-
 
     function incrementHvp(){
         if(dataPoints > 0){
@@ -163,11 +157,12 @@ export default function MfStats(){
 
     function sendData(){
         if (dataPoints <= 0){
-            socket.emit("send_data_points",{hvp:hvp,da:da,ca:ca,gs:gs,passv:passv});
-            socket.on("receive_players", (data) => {
-                setPlayers(data);
-            })
-            socket.emit("send_player_data",players);
+            let playerDataCpy = playerList;
+            for (let i = 0;i < data.length; i++){
+                playerDataCpy[i].score = (playerDataCpy[i].mf_hvp * hvp) + (playerDataCpy[i].mf_da * da) + (playerDataCpy[i].mf_ca * ca) + (playerDataCpy[i].mf_gs * gs) + (playerDataCpy[i].mf_br  * br);
+            }
+            playerDataCpy.sort((a,b) => b.score - a.score);
+            setPlayerList(playerDataCpy.slice(0,50));
         } else {
             alert("All data points not used");
         }

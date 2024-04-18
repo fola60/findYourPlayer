@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useContext } from 'react'
 import '../styles/pickStats.css'
 import io from 'socket.io-client'
 import { useEffect, useState, useRef } from 'react'
@@ -12,10 +12,12 @@ import ligue1 from '../img/ligue1.png'
 import lewandowski from '../img/lewandowski.png'
 import kroos from '../img/kroos.png'
 import kim from '../img/kimMinJae.png'
+import { PlayerData } from '../App'
 
-const socket = io.connect("http://16.170.183.948080");
 
 export default function PickStats(){
+    const {setPlayerList} = useContext(PlayerData)
+
     const linkRef = useRef(null);
 
     const [league,setLeague] = useState(null);
@@ -42,8 +44,8 @@ export default function PickStats(){
                 try {
                     const response = await fetch(`allValue/pos/${pos}/league/${league}`);
                     const result = await response.json();
-                    socket.emit("send_players", result);
-                    setGet(result)
+                    setPlayerList(result);
+                    setGet(result);
                     
                 } catch (error) {
                     console.error('Error fetching data ' + error);

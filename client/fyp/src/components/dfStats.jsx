@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useContext } from 'react'
 import '../styles/dfStats.css'
 import io from 'socket.io-client'
 import { useEffect, useState } from 'react'
+import { PlayerData } from '../App'
 
-const socket = io.connect("http://16.170.183.94:8080");
 
 
 
 export default function DfStats(){
+    const {playerList,setPlayerList} = useContext(PlayerData);
+     
+
     const [path,setPath] = useState("player-position-df")
 
     const [dataPoints,setDataPoints] = useState(20);
@@ -26,7 +29,6 @@ export default function DfStats(){
     const [passvDp,setpassvDp] = useState([]);
     const [attabbDp,setattabbDp] = useState([]);
     
-    const [players,setPlayers] = useState(null);
     const [bar,setBar] = useState([<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,<div className='bar-df'></div>,]);
 
 
@@ -87,15 +89,9 @@ export default function DfStats(){
         }
      },[dataPoints]);
 
-    useEffect(() => {
-        socket.on("receive_players", (data) => {
-            setPlayers(data);
-        });
-    },[socket]);
     
-    useEffect(() =>{
-        console.log("socket Triggered data:" + players);
-    },[players]);
+    
+   
 
 
     function incrementbpa(){
@@ -180,11 +176,13 @@ export default function DfStats(){
 
     function sendData(){
         if (dataPoints == 0){
-            socket.emit("send-data_points_df",{bpa:bpa,da:da,pr:pr,aggr:aggr,passv:passv,aa:attabb});
-            socket.on("receive_players", (data) => {
-                setPlayers(data);
-            })
-            socket.emit("send_player_data_df",players);
+            let PlayerListCpy = playerList;
+            for(let i = 0;i < PlayerListCpy.length; i++){
+                PlayerListCpy[i].score = (PlayerListCpy[i].df_aggr * aggr) + (PlayerListCpy[i].df_bpa * bpa) + (PlayerListCpy[i].df_passv * passv) + (PlayerListCpy[i].df_aa * aa) + (PlayerListCpy[i].df_da * da) + (PlayerListCpy[i].df_pr * pr);
+            }
+            PlayerListCpy.sort((a,b) => b.score - a.score);
+            setPlayerList(PlayerListCpy.slice(0,50))
+
         } else {
             alert("All data points not used!");
         }
