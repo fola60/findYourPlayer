@@ -1,26 +1,23 @@
 import '../styles/playerDataPage.css'
 import  './charts.jsx'
 import Charts from './charts.jsx'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext,useContext} from 'react';
 import io from 'socket.io-client'
+import { PlayerData } from '../App.js';
 
+const socket = io.connect("http://16.170.183.94:8080");
 
-const socket = io.connect("http://13.48.124.9:8080");
-
-export default function PlayerDataPage(props){
+export default function PlayerDataPage(){
+    const {playerId,setPlayerId} = useContext(PlayerData);
     const [data,setData] = useState(null)
     const [id,setId] = useState(1);
     useEffect(() =>{
-        setTimeout(() => {
-            socket.on("receive_id", (data) => {
-                setId(data.id);
-            });
-        },1000);
-        setTimeout(() => {
-            socket.on("receive_id", (data) => {
-                setId(data.id);
-            });
-        },2000);
+        
+        socket.on("receive_id", (data) => {
+            setId(data.id);
+            
+        })
+        
     }, [socket]);
     
     
@@ -28,7 +25,7 @@ export default function PlayerDataPage(props){
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await fetch(`/allValue/id/${id}`)
+                const response = await fetch(`/allValue/id/${playerId}`)
                 const result = await response.json()
                 setData(result)
                 
@@ -39,7 +36,7 @@ export default function PlayerDataPage(props){
         }
         getData();
         console.log("Id: " + id);
-    },[id]);
+    },[playerId]);
     
 
     return (

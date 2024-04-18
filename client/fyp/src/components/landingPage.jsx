@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import '../styles/landingPage.css'
 import SearchBar from './searchBar'
 import logo from '../img/logo-fyp.png'
@@ -9,10 +9,10 @@ import leao from '../img/leao.png'
 import rashford from '../img/rashford.png'
 import bellingham from '../img/bellingham.png'
 import vanDijk from '../img/vanDijk.png'
+import { PlayerData } from '../App'
 
-
-export default function LandingPage(props){
-  
+export default function LandingPage(){
+    const {playerId,setPlayerId} = useContext(PlayerData);
 
     
     
@@ -21,7 +21,7 @@ export default function LandingPage(props){
                 <div className='container-landing'>
                     <div className="landing-container">
                         <div className="header-landing">
-                            <SearchBar className='search-bar-container'/>
+                            <SearchBar className='search-bar-container' />
                         </div>
                         
                         <div className="landing-body">

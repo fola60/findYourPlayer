@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, createContext,useContext} from 'react'
 import './components/landingPage.jsx'
 import LandingPage from './components/landingPage.jsx'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
@@ -10,20 +10,26 @@ import FwStats from './components/fwStats.jsx'
 import PlayerRanks from './components/playerRanks.jsx'
 import PickStats from './components/pickStats.jsx'
 
-export default function App() {
-  
+export const PlayerData = createContext(null);
 
-  
+export default function App() {
+const [playerId,setPlayerId] = useState(1)
+
+  useEffect(() => {
+    console.log("YIPPEEE!!");
+  },[playerId]);
   
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/">
-            <LandingPage/>
+          <PlayerData.Provider value={{playerId, setPlayerId}}>
+              <LandingPage/>
+            </PlayerData.Provider>
           </Route>
           <Route exact path="/player-chart">
-            <PlayerDataPage />
+              <PlayerDataPage />
           </Route>
           <Route exact path="/player-league">
             <PickStats/>
@@ -41,7 +47,9 @@ export default function App() {
             <FwStats/>
           </Route>
           <Route exact path="/player-rank">
-            <PlayerRanks/>
+            <PlayerData.Provider value={{playerId, setPlayerId}}>
+              <PlayerRanks/>
+            </PlayerData.Provider>
           </Route>
         </Switch>
       </Router>

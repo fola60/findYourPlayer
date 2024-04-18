@@ -1,17 +1,18 @@
 import '../styles/searchBar.css'
 import {FaSearch} from "react-icons/fa"
-import { useState,useEffect } from 'react'
+import { useState,useEffect ,useContext} from 'react'
 import { Link } from 'react-router-dom'
 import io from 'socket.io-client'
 import uuid from 'react-uuid'
 import logo from '../img/logo-fyp.png'
+import { PlayerData } from '../App'
 
-const socket = io.connect("http://13.48.124.9:8080");
+const socket = io.connect("http:/16.170.183.94:8080");
 
 
 
 export default function SearchBar(props){
-    
+    const {playerId,setPlayerId} = useContext(PlayerData);
     const [input,setInput] = useState("");
     const [info,setInfo] = useState([])
     function sendId(id){
@@ -37,6 +38,7 @@ export default function SearchBar(props){
 
     const handleChange = (value) => {
         setInput(value)
+        
     } 
     return (
         <>
@@ -63,7 +65,7 @@ export default function SearchBar(props){
                                         onClick={()=>{
                                             sendId(result.id)
                                             console.log(result.id)
-                                            
+                                            setPlayerId(result.id);
                                         }}>
                                             {result.player}  - Born:{Math.floor(result.born)} - Position:{result.pos} - league: {result.comp}
                                         </span>

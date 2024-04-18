@@ -4,7 +4,7 @@ import '../styles/dfStats.css'
 import io from 'socket.io-client'
 import { useEffect, useState } from 'react'
 
-const socket = io.connect("http://13.48.124.9:8080");
+const socket = io.connect("http://16.170.183.94:8080");
 
 
 
