@@ -19,7 +19,7 @@
 
 .container-fw{
     width:100vw;
-    background-color: aliceblue;
+    background-color: white;
     gap: 1rem;
     display: flex;
     flex-direction: column;
@@ -27,7 +27,7 @@
 
 .header-fw{
     width:100%;
-    background-color: aliceblue;
+    background-color: white;
     font-size: 3rem;
     font-weight: 500;
     display: flex;

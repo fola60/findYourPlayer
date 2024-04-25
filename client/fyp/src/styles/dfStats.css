@@ -23,7 +23,7 @@
 
 .container-df{
     width:100vw;
-    background-color: aliceblue;
+    background-color: white;
     gap: 1rem;
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@
 
 .header-df{
     width:100%;
-    background-color: aliceblue;
+    background-color: white;
     font-size: 300%;
     font-weight: 500;
     display: flex;
