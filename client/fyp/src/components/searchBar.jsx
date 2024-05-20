@@ -23,7 +23,7 @@ export default function SearchBar(props){
                 const response = await fetch("/allValue/search")
                 const result = await response.json();
                 const filter = result.filter((user) => {
-                    return input.toLowerCase() && user && user.player && user.player.toLowerCase().includes(input)
+                    return input.toLowerCase() && user && user.player && user.player.toLowerCase().includes(input.toLowerCase())
                 })
                 setInfo(filter)
                 
