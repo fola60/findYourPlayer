@@ -1,7 +1,7 @@
 {
   "name": "fyp",
   "version": "0.1.0",
-  "proxy": "http://16.170.183.94:5001",
+  "proxy": "http://16.170.183.94:80",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",

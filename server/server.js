@@ -17,7 +17,7 @@ app.use(cors());
 app.use(morgan("dev"));
 
 
-const PORT = 5001;
+const PORT = 80;
 
 
 app.use(express.json());
