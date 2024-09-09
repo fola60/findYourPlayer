@@ -1,24 +1,17 @@
+const client = require('./dataBaseInfo');
+
+
+client.connect()
+  .then(() => console.log('Connected to the database'))
+  .catch(err => console.error('Connection error', err.stack));
+
+
+
+
 /*
-const {Client} = require('pg');
-
-const client = new Client({
-    host: "localhost",
-    user: "postgres",
-    port: 5432,
-    password:"sarah2014",
-    database: "top5playerdata",
-    idleTimeoutMillis: 20000,
-    connectionTimeoutMillis: 20000,
-});
-
-
-
-
-client.connect();
-
-
 client.query(`CREATE TABLE playerdataPER(
-    id BIGSERIAL PRIMARY KEY,  
+    id BIGINT PRIMARY KEY,
+    plcl_id BIGSERIAL,  
     _90s FLOAT, 
     gls90PER FLOAT,
     sh90PER FLOAT,
@@ -80,7 +73,7 @@ client.query(`CREATE TABLE playerdataPER(
 // test.query(`SELECT * FROM playerdataPER`, (err,res)=>{
 //     console.log(res.rows);
 // })
-/*
+
 let datasizeDf = 0;
 let datasizeMfD = 0;
 let datasizeMfF = 0;
@@ -138,7 +131,7 @@ client.query(`SELECT * FROM playerdata WHERE pos != 'GK'`,(err, res)=>{
             }
         }
         console.log(position)
-        datasize = res.rows.length;
+        let datasize = res.rows.length;
         percentile = (position / datasize) * (100);
         console.log(percentile.toFixed(2))
         //test.query(`INSERT INTO testpercent(gls, shp)VALUES(${percentile},${percentile})`)
@@ -180,14 +173,14 @@ client.query(`SELECT * FROM playerdata WHERE pos != 'GK'`,(err, res)=>{
             }
 
             //console.log(res.rows[i].player)
-            /*
+            
             console.log(`position: ${position}`)
             console.log(`datasize: ${datasize}`)
-            */
+            
             position = 0;
             
 
-        /*
+        
         for(let j = 0; j < res.rows.length;j++){
                 if(res.rows[i].pos == res.rows[j].pos || res.rows[i].pos == 'MF' && res.rows[j].pos == 'MF,FW' ||res.rows[i].pos == 'DF' && res.rows[j].pos == 'DF,FW' || res.rows[i].pos  == 'DF,FW' && res.rows[j].pos == 'DF' || res.rows[i].pos == 'FW' && res.rows[j].pos == 'FW,DF' || res.rows[i].pos == 'FW,DF' && res.rows[j].pos == 'FW' ||res.rows[i].pos == 'FW,MF' && res.rows[j].pos == 'FW,DF' ||res.rows[i].pos == 'FW,DF' && res.rows[j].pos == 'FW,MF' || res.rows[i].pos == 'MF' && res.rows[j].pos == 'DF,MF' || res.rows[i].pos == 'MF' && res.rows[j].pos == 'MF,DF' || res.rows[i].pos == 'DF,MF' && res.rows[j].pos == 'MF' || res.rows[i].pos == 'DF,MF' && res.rows[j].pos == 'MF,DF' || res.rows[i].pos == 'MF,DF' && res.rows[j].pos == 'MF' || res.rows[i].pos == 'MF,DF' && res.rows[j].pos == 'DF,MF' || res.rows[i].pos == 'MF,FW' && res.rows[j].pos == 'MF'  || res.rows[i].pos == 'FW' && res.rows[j] == 'FW,MF' || res.rows[i].pos == 'FW,MF' && res.rows[j].pos == 'FW'){
                 if ((parseFloat(res.rows[i].sh)  / parseFloat(res.rows[i]._90s) ) >= (parseFloat(res.rows[j].sh)   / parseFloat(res.rows[i]._90s) )){
@@ -220,7 +213,7 @@ client.query(`SELECT * FROM playerdata WHERE pos != 'GK'`,(err, res)=>{
             position = 0;
             
 
-            
+        
         for(let j = 0; j < res.rows.length;j++){
                 if (res.rows[i].pos == res.rows[j].pos || res.rows[i].pos == 'MF' && res.rows[j].pos == 'MF,FW' ||res.rows[i].pos == 'DF' && res.rows[j].pos == 'DF,FW' || res.rows[i].pos  == 'DF,FW' && res.rows[j].pos == 'DF' || res.rows[i].pos == 'FW' && res.rows[j].pos == 'FW,DF' || res.rows[i].pos == 'FW,DF' && res.rows[j].pos == 'FW' ||res.rows[i].pos == 'FW,MF' && res.rows[j].pos == 'FW,DF' ||res.rows[i].pos == 'FW,DF' && res.rows[j].pos == 'FW,MF' || res.rows[i].pos == 'MF' && res.rows[j].pos == 'DF,MF' || res.rows[i].pos == 'MF' && res.rows[j].pos == 'MF,DF' || res.rows[i].pos == 'DF,MF' && res.rows[j].pos == 'MF' || res.rows[i].pos == 'DF,MF' && res.rows[j].pos == 'MF,DF' || res.rows[i].pos == 'MF,DF' && res.rows[j].pos == 'MF' || res.rows[i].pos == 'MF,DF' && res.rows[j].pos == 'DF,MF' || res.rows[i].pos == 'MF,FW' && res.rows[j].pos == 'MF'   || res.rows[i].pos == 'FW' && res.rows[j] == 'FW,MF' || res.rows[i].pos == 'FW,MF' && res.rows[j].pos == 'FW'){
                 if ((parseFloat(res.rows[i].sotpct)   >= parseFloat(res.rows[j].sotpct) )){
@@ -2029,4 +2022,3 @@ client.query(`SELECT * FROM playerdata WHERE pos != 'GK'`,(err, res)=>{
     client.end;
 } 
 )
-*/

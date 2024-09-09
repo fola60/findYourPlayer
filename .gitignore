@@ -1,3 +1,3 @@
 .gitsecret/keys/random_seed
 !*.secret
-database.js filter=git-crypt diff=git-crypt
+dataBase.js filter=git-crypt diff=git-crypt
