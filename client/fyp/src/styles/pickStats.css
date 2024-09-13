@@ -17,12 +17,19 @@
     padding: 0;
 }
 
+#particles {
+    z-index: -1;
+    height:100%;
+    width:100%;
+    position: absolute;
+}
+
+
 
 
 .pick-stats-container{
-    height: 100vh;
+    height: fit-content;
     width: 100vw;
-    background-color: #1A1110;
     flex-wrap: wrap;
     color:aliceblue;
     flex-direction: column;
@@ -32,24 +39,25 @@
 }
 
 .league-container{
-    min-height:45%;
+    height: fit-content;
     width:100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
+    margin-bottom: 3rem;
 }
 
 .league{
-    height: 200px;
-    width:200px;
+    max-height: 200px;
+    max-width:200px;
     padding: 1rem;
 }
 
 .container-position{
     width:100%;
-    max-height: fit-content;
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,17 +67,16 @@
 }
 
 .position{
-    max-width:150px;
-    max-height:150px;
-    min-width:50px;
-    min-height:50px;
-    display: flex;
     
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
 .link{
-    height:45px;
+    height:fit-content;
     padding:0.75rem;
     
 }
@@ -116,8 +123,8 @@
 }
 
 .Img-ps {
-    width:200px;
-    height: 200px;
+    width:150px;
+    height: 150px;
     background-color: white;
     border-radius: 0.5rem  ;
     border: solid red;
@@ -139,6 +146,12 @@
     background-color: #0C0032 ;
     border:2px solid red;
     border-radius: 1rem;
+}
+
+.pos-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .highlighted{

@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
-const pool = require("./dataBaseInfo");
+const pool = require("./serverDb");
 const fs = require('fs');
 const http = require("http");
-const { Server } = require("socket.io");
 const cors = require("cors");
 const morgan = require('morgan');
 
@@ -32,10 +31,23 @@ app.get("/allValue", async(req,res) => {
         FROM playerdata
         JOIN playerdataPER ON playerdata.per_id = playerdataper.id
         JOIN playerclasses ON playerdataper.plcl_id = playerclasses.id;`);
-
         res.json(getAll.rows)
     } catch (err) {
         console.error(err.message)
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+app.get("/test", async(req,res) => {
+    try{
+        
+        const getAll = await pool.query(`
+        SELECT 1;`);
+        
+        res.json(getAll)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
@@ -328,7 +340,7 @@ app.get("/allValue/pos/df/league/laliga", async (req,res) => {
 app.get("/allValue/search", async (req,res) => {
     try{
     const names = await pool.query(`
-        SELECT player,id,pos,born,comp
+        SELECT player,id,pos,birthyear,comp
         FROM playerdata WHERE pos != 'GK'; 
     `)
     res.json(names.rows);

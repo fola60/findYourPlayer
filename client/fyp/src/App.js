@@ -9,6 +9,7 @@ import MfStats from './components/mfStats.jsx'
 import FwStats from './components/fwStats.jsx'
 import PlayerRanks from './components/playerRanks.jsx'
 import PickStats from './components/pickStats.jsx'
+import ParticlesComponent from './components/particles.jsx'
 
 export const PlayerData = createContext(1);
 

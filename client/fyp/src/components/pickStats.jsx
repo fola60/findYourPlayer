@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom'
 import React, { useContext } from 'react'
 import '../styles/pickStats.css'
-import io from 'socket.io-client'
 import { useEffect, useState, useRef } from 'react'
-import uuid from 'react-uuid'
 import prem from '../img/prem.png'
 import bundesliga from '../img/bundesliga.png'
 import seriea from '../img/seriea.png'
@@ -13,6 +11,7 @@ import lewandowski from '../img/lewandowski.png'
 import kroos from '../img/kroos.png'
 import kim from '../img/kimMinJae.png'
 import { PlayerData } from '../App'
+import ParticlesComponent from './particles'
 
 
 export default function PickStats(){
@@ -162,22 +161,23 @@ export default function PickStats(){
 
     return (
         <>
+        <ParticlesComponent id="particles" />
         <div className="pick-stats-container">
             <h1 className='h1tag'>Pick a League</h1>
             <div className='league-container' onClick={scrollLink}>
-                    <div className='league Img' id='prem' onClick={setLeaguePrem}>
+                    <div className='league' id='prem' onClick={setLeaguePrem}>
                         <img className={boolPrem ? 'Img-ps highlighted': 'Img-ps'} src={prem} onClick={highlightPrem} />
                     </div>
-                    <div className='league ' id='bundesliga' onClick={setLeagueBundesliga}>
+                    <div className='league' id='bundesliga' onClick={setLeagueBundesliga}>
                         <img className={boolBundesliga ? 'Img-ps highlighted': 'Img-ps'} src={bundesliga} onClick={highlightBundesliga} />
                     </div> 
-                    <div className='league ' id='ligue1' onClick={setLeagueligue1}>
+                    <div className='league' id='ligue1' onClick={setLeagueligue1}>
                         <img className={boolLigue1 ? 'Img-ps highlighted': 'Img-ps'} src={ligue1} onClick={highlightLigue1} />
                     </div> 
-                    <div className='league ' id='serieA' onClick={setLeagueSerieA}>
+                    <div className='league' id='serieA' onClick={setLeagueSerieA}>
                         <img className={boolSeriea ? 'Img-ps highlighted': 'Img-ps'} src={seriea} onClick={highlightSeriea} />
                     </div> 
-                    <div className='league ' id='laLiga' onClick={setLeagueLaLiga}>
+                    <div className='league' id='laLiga' onClick={setLeagueLaLiga}>
                         <img className={boolLaliga ? 'Img-ps highlighted': 'Img-ps'} src={laliga} onClick={highlightLaliga} />
                     </div>
                      

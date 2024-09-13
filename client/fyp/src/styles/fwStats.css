@@ -17,9 +17,15 @@
     padding: 0;
 }
 
+#particles {
+    z-index: -1;
+    height:100%;
+    width:100%;
+    position: absolute;
+}
+
 .container-fw{
     width:100vw;
-    background-color: white;
     gap: 1rem;
     display: flex;
     flex-direction: column;
@@ -27,11 +33,11 @@
 
 .header-fw{
     width:100%;
-    background-color: white;
     font-size: 3rem;
     font-weight: 500;
     display: flex;
     align-items: center;
+    justify-content: center;
     overflow-x: hidden;
     color:black;
     padding-top:1rem;

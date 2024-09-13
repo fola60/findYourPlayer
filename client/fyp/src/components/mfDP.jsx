@@ -20,7 +20,7 @@ export default function MfDP(props,{updateBr,updateCa,updateDa,updateGs,updateHv
                 <div className="data-points" onClick={() => updateHvp}>High Volume passing :{hvp}</div>
                 <div className="data-points" onClick={() => updateDa}>Defensive Ability :{da}</div>
                 <div className="data-points" onClick={() => updateCa}>Creative Ability: {ca}</div>
-                <div className="data-points" onClick={() => updateGs}>Goal Scoring: {gs}</div>
+                <div className="data-points" onClick={() => updateGs}>Gool Scoring: {gs}</div>
                 <div className="data-points" onClick={() => updateBr}>Ball Retention: {br}</div>
                 <div className="data-points">{dataPoints}</div>
                     <div className="data-points" 

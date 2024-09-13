@@ -2,9 +2,7 @@ import '../styles/searchBar.css'
 import {FaSearch} from "react-icons/fa"
 import { useState,useEffect ,useContext} from 'react'
 import { Link } from 'react-router-dom'
-import io from 'socket.io-client'
 import uuid from 'react-uuid'
-import logo from '../img/logo-fyp.png'
 import { PlayerData } from '../App'
 
 
@@ -64,7 +62,7 @@ export default function SearchBar(props){
                                             console.log(result.id)
                                             setPlayerId(result.id);
                                         }}>
-                                            {result.player}  - Born:{Math.floor(result.born)} - Position:{result.pos} - league: {result.comp}
+                                            {result.player}  - Born:{Math.floor(result.birthyear)} - Position:{result.pos} - league: {result.comp}
                                         </span>
                                 </Link>
                                 </div>

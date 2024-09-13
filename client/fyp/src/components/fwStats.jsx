@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import '../styles/fwStats.css'
 import { useEffect, useState ,useContext} from 'react'
-
+import ParticlesComponentWhite from './particlesWhite'
 import { PlayerData } from '../App'
 
 
@@ -171,7 +171,8 @@ export default function FwStats(){
     }
 
     return (
-        <>
+        <>  
+            <ParticlesComponentWhite id="particles" />
             <div className="container-fw">
             <div className="header-fw">Assign Points to Categories You Want Your Player to posses.</div>
             <div className="container-data-points">

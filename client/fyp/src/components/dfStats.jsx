@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import '../styles/dfStats.css'
 import { useEffect, useState } from 'react'
 import { PlayerData } from '../App'
-
+import ParticlesComponentWhite from './particlesWhite'
 
 
 
@@ -190,7 +190,8 @@ export default function DfStats(){
     }
 
     return (
-        <>
+        <>  
+            <ParticlesComponentWhite id="particles" />
             <div className="container-df">
             <div className="header-df">Assign Points to Categories You Want Your Player to posses.</div>
             <div className="container-data-points">

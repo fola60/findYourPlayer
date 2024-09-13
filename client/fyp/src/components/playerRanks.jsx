@@ -1,11 +1,11 @@
 import '../styles/playerRanks.css'
 import { useState, useEffect,useContext } from 'react'
-import io from 'socket.io-client'
 import { Link } from 'react-router-dom'
 import uuid from 'react-uuid'
 import { PlayerData } from '../App'
+import ParticlesComponentWhite from './particlesWhite'
 
-const socket = io.connect("http://16.170.183.94:8080");
+
 
 export default function PlayerRank(){
     const {playerList,setPlayerId} = useContext(PlayerData);
@@ -18,6 +18,7 @@ export default function PlayerRank(){
 
     return (
         <>
+            <ParticlesComponentWhite id="particles" />
             <div className="rank-container">
                 <div className="header">
                     <header className='header-title'>Top 50 Players!</header>

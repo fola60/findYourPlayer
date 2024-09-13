@@ -1,13 +1,15 @@
 {
   "name": "fyp",
   "version": "0.1.0",
-  "proxy": "http://16.170.183.94:80",
+  "proxy": "http://localhost:80",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@tsparticles/all": "^3.5.0",
+    "@tsparticles/react": "^3.0.0",
     "chart.js": "^4.4.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",

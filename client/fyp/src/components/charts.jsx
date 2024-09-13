@@ -364,7 +364,7 @@ export default function Charts(props){
                         ]
                     },
                     {
-                        labels: ['Shot creating actions Take ons','Goal Creating Actions' ,'Goal Creating Actions Take ons', 'Carries', 'Carries into final 3rdd', 'Take on succes rate'],
+                        labels: ['Shot creating actions Take ons','Goal Creating Actions' ,'Goal Creating Actions Take ons', 'Carries', 'Carries into final 3rd', 'Take on succes rate'],
                         datasets: [
                             {
                                 label: 'Dribbling Stats',

@@ -10,6 +10,7 @@ import rashford from '../img/rashford.png'
 import bellingham from '../img/bellingham.png'
 import vanDijk from '../img/vanDijk.png'
 import { PlayerData } from '../App'
+import ParticlesComponent from './particles'
 
 export default function LandingPage(){
     const {playerId,setPlayerId} = useContext(PlayerData);
@@ -18,6 +19,7 @@ export default function LandingPage(){
     
         return (
             <>  
+                <ParticlesComponent id="particles" />
                 <div className='container-landing'>
                     <div className="landing-container">
                         <div className="header-landing">
@@ -25,14 +27,7 @@ export default function LandingPage(){
                         </div>
                         
                         <div className="landing-body">
-                            <div className="player-photo">
-                                <div className="player-1">
-                                    <img className='img1 Img-lp' src={vanDijk} />
-                                </div>
-                                <div className="player-2">
-                                    <img className='img2 Img-lp' src={bellingham}  />
-                                </div>
-                            </div>
+                           
                             <div className='league-link'>
                                 <Link to='player-league' className='Link'>
                                     <div className="logo-div">
@@ -43,14 +38,7 @@ export default function LandingPage(){
                                     </div>
                                 </Link>
                             </div>
-                            <div className="player-photo">
-                                <div className="player-3">
-                                    <img className='img1 Img-lp' src={rashford} />
-                                </div>
-                                <div className="player-4">
-                                    <img className='img2 Img-lp' src={leao}  />
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

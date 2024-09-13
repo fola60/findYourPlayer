@@ -5,6 +5,7 @@ import io from 'socket.io-client'
 import { useEffect, useState ,useContext} from 'react'
 import '../styles/mfStats.css'
 import { PlayerData } from '../App'
+import ParticlesComponentWhite from './particlesWhite'
 
 
 
@@ -173,7 +174,8 @@ export default function MfStats(){
     
 
     return (
-        <>  
+        <>
+        <ParticlesComponentWhite id="particles" />
         <div className="container-mf">
             <div className="header-mf">Assign Points to Categories You Want Your Player to posses.</div>
             <div className="container-data-points">
