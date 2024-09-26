@@ -1,9 +1,8 @@
 import {React, useEffect, useState} from "react"
-import io from 'socket.io-client'
 import { Link } from 'react-router-dom'
 import '../styles/posPick.css'
 
-const socket = io.connect("http://16.170.183.94:8080");
+
 
 export default function PosPick(){
     const [pos,setPos] = useState("");
@@ -20,10 +19,7 @@ export default function PosPick(){
     function setPosFw(){
         setPos("fw");
     }
-    function sendPos(){
-        socket.emit("send_position",{position: pos}); 
-    }
-
+    
 
 
     return (
@@ -33,7 +29,7 @@ export default function PosPick(){
                 <div className="position" onClick={setPosMf}>mf</div>
                 <div className="position" onClick={setPosFw}>fw</div>
                 <Link to={path}>
-                    <div className="position" onClick={sendPos}>Next</div>
+                    <div className="position" >Next</div>
                 </Link>
             </div>
         </>

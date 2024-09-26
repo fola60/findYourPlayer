@@ -12,7 +12,7 @@ export default function FwStats(){
 
 
 
-    const [path,setPath] = useState("player-position-fw");
+    const [path,setPath] = useState("/player-position-fw");
 
     const [dataPoints,setDataPoints] = useState(15);
     const [dr,setdr] = useState(0);
@@ -77,9 +77,9 @@ export default function FwStats(){
         setpassDp(barspass);
         
         if(dataPoints == 0){
-            setPath("player-rank")
+            setPath("/player-rank")
         } else {
-            setPath("player-position-fw");
+            setPath("/player-position-fw");
         }
      },[dataPoints]);
 

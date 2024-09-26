@@ -11,7 +11,7 @@ export default function DfStats(){
     const {playerList,setPlayerList} = useContext(PlayerData);
      
 
-    const [path,setPath] = useState("player-position-df")
+    const [path,setPath] = useState("/player-position-df")
 
     const [dataPoints,setDataPoints] = useState(20);
     const [bpa,setbpa] = useState(0);
@@ -82,9 +82,9 @@ export default function DfStats(){
         }
         setattabbDp(barsattabb);
         if(dataPoints == 0){
-            setPath("player-rank");
+            setPath("/player-rank");
         } else {
-            setPath("player-position-df");
+            setPath("/player-position-df");
         }
      },[dataPoints]);
 

@@ -21,7 +21,7 @@ export default function PickStats(){
 
     const [league,setLeague] = useState(null);
     const [pos,setPos] = useState("");
-    const [path,setPath] = useState("player-league");
+    const [path,setPath] = useState("/player-league");
     const [boolPrem,setBoolPrem] = useState(false);
     const [boolBundesliga,setBoolBundesliga] = useState(false);
     const [boolLigue1,setBoolLigue1] = useState(false);
@@ -145,11 +145,11 @@ export default function PickStats(){
     useEffect(() => {
         console.log(pos)
         if(pos == "mf" && league != null){
-            setPath("player-position-mf");
+            setPath("/player-position-mf");
         } else if(pos == "fw" && league != null){
-            setPath("player-position-fw");
+            setPath("/player-position-fw");
         } else if(pos == "df" && league != null){
-            setPath("player-position-df");
+            setPath("/player-position-df");
         }
     },[pos])
     function scrollLink(){

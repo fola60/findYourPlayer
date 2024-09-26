@@ -2,7 +2,6 @@ import '../styles/playerDataPage.css'
 import  './charts.jsx'
 import Charts from './charts.jsx'
 import { useEffect, useState, createContext,useContext} from 'react';
-import io from 'socket.io-client'
 import { PlayerData } from '../App';
 
 

@@ -6,10 +6,12 @@ import { useEffect, useState ,useContext} from 'react'
 import '../styles/mfStats.css'
 import { PlayerData } from '../App'
 import ParticlesComponentWhite from './particlesWhite'
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function MfStats(){
+    const navigate = useNavigate();
     const {playerList,setPlayerList} = useContext(PlayerData);
 
 
@@ -79,9 +81,9 @@ export default function MfStats(){
         setpassvDp(barspassv);
 
         if(dataPoints == 0){
-            setPath("player-rank");
+            setPath("/player-rank");
         } else {
-            setPath("player-position-mf");
+            setPath("/player-position-mf");
         }
 
      },[dataPoints]);
@@ -160,6 +162,9 @@ export default function MfStats(){
     function sendData(){
         if (dataPoints <= 0){
             let playerDataCpy = playerList;
+                navigate('/player-position-mf');
+                console.log("player list is invalid")
+            
             for (let i = 0;i < playerDataCpy.length; i++){
                 playerDataCpy[i].score = (playerDataCpy[i].mf_hvp * hvp) + (playerDataCpy[i].mf_da * da) + (playerDataCpy[i].mf_ca * ca) + (playerDataCpy[i].mf_gs * gs) + (playerDataCpy[i].mf_br  * passv);
             }
