@@ -7,12 +7,12 @@
 * [![Postgres][Postgresql]][Postgresql-url]
 
 # About the Project
-<p>
-  This project is a tool for football enthusiasts and analysts. It allows users to search for their desired player withing europe's top 5 leagues and view percentile statistics and graphs on the player.
-  You can also find new exciting players by searching for players by attributes such as chances created, defending, ball retention etc.
-</p>
+
+This project is a tool for football enthusiasts and analysts. It allows users to search for their desired player within europe's top 5 leagues and view percentile statistics and graphs on the player.
+You can also find new exciting players by searching for players by attributes such as chances created, defending, ball retention etc.
+
 ### Key Features:
-- **Search By Player names or attributes **: Locate players by their name or do a custom search to find players who fit what attributes you are looking for.
+- **Search By Player names or attributes**: Locate players by their name or do a custom search to find players who fit what attributes you are looking for.
 - **Stats and Graphs**: View percentile statistics and percentile graphs.
 
 # Usage
