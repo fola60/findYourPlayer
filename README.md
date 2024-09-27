@@ -1,6 +1,6 @@
 # FindYourPlayer
 ### Built with
 # About the Project
-# Getting Started
+# Usage
 
 <!-- MARKDOWN LINKS & IMAGES -->
