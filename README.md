@@ -38,6 +38,7 @@ You can also find new exciting players by searching for players by attributes su
 
 
 ## Contact
+#### Afolabi Adekanle - afolabiadekanle@gmail.com - [![linkedin][linked-in][LinkedIn-url]
 <!-- MARKDOWN LINKS & IMAGES -->
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
@@ -49,4 +50,6 @@ You can also find new exciting players by searching for players by attributes su
 [Python-url]:https://www.python.org/
 [Postgresql]:https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white
 [Postgresql-url]:https://www.postgresql.org/
+[linked-in]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+[LinkedIn-url]: https://www.linkedin.com/in/afolabi-adekanle-68428b1b6/
 
