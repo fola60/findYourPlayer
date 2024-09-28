@@ -16,8 +16,15 @@ You can also find new exciting players by searching for players by attributes su
 - **Stats and Graphs**: View percentile statistics and percentile graphs.
 
 # Usage
-### When you get to the landing page, there will be two options. You can either search by name of click the magnifying glass in the middle of the screen and search for players by attributes.
-![LandingPage](./pictures/fyp1.png)
+#### When you get to the landing page, there will be two options. You can either search by name of click the magnifying glass in the middle of the screen and search for players by attributes.
+![Landing-Page](./pictures/fyp1.png)
+### Searching by name will cause a list of players to show up that match your search.
+![Search-results](./pictures/fyp2.png)
+### After clicking on the player it will bring you to a graph with the most important percentile statistics for that players particular position.
+![Player-Graph](./pictures/fyp3.png)
+### If you scroll down, you can also view more in depth percentile statistics and the some of the more specific data points in the view of a graph. Clicking the arrows allows u to move between diffrent categories of statistics.
+![Player-Graph-Detail](./pictures/fyp4.png)
+
 
 
 ## Contact
