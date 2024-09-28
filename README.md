@@ -29,7 +29,7 @@ You can also find new exciting players by searching for players by attributes su
 #### This will bring you to a page where you can specify the positon of the player you want to search for and the league in which they play in.
 ![Player-Pick](./pictures/fyp5.png)
 #### After specifying league and position, you will be taken to a page and shown categories based on the position you chose. By adding the points, shown on the right hand side, by clicking the + symbol, you can decide primarly what characteristics you want your player to have. For example, if all the points where added to the creative ability category, it would give you the player with the best creative ability, filtered by league and psoition you chose. If you want to find the best all round player, you can divide the points between the categories equally. All points must be used to proceed.
-![Data-Points](./picutres/fyp6.png)
+![Data-Points](./pictures/fyp6.png)
 #### After clicking "Generate Player" you will be shown a list of the top 50 players who matched your description. The first player will be who fit the description best.
 ![Player-List](./pictures/fyp7.png)
 #### You can also click on the name of that player, in which it will bring you to the stats of said player.
