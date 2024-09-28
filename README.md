@@ -38,7 +38,7 @@ You can also find new exciting players by searching for players by attributes su
 
 
 ## Contact
-#### Afolabi Adekanle - afolabiadekanle@gmail.com - [![linkedin][linked-in][LinkedIn-url]
+#### Afolabi Adekanle - afolabiadekanle@gmail.com - [![linkedin][linked-in]][LinkedIn-url]
 <!-- MARKDOWN LINKS & IMAGES -->
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
