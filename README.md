@@ -16,6 +16,9 @@ You can also find new exciting players by searching for players by attributes su
 - **Stats and Graphs**: View percentile statistics and percentile graphs.
 
 # Usage
+When you get to the landing page, there will be two options. You can either search by name of click the magnifying glass in the middle of the screen and search for players by attributes.
+![LandingPage](./pictures/fyp1.png)
+
 
 ## Contact
 <!-- MARKDOWN LINKS & IMAGES -->
