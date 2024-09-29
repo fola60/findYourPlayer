@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
 const pool = require("./serverDb");
-const fs = require('fs');
-const http = require("http");
 const cors = require("cors");
-const morgan = require('morgan');
+
 
 
 
@@ -13,10 +11,10 @@ const morgan = require('morgan');
 
 
 app.use(cors());
-app.use(morgan("dev"));
 
 
-const PORT = 80;
+
+const PORT = 8800;
 
 
 app.use(express.json());

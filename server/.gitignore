@@ -1,8 +1,4 @@
 node_modules
-dataBase.js
-dataBase.js filter=git-crypt diff=git-crypt
-dataTable.js
 server.key
 server.cert
-dataBaseInfo.js
-serverDb.js
+.env
