@@ -1,4 +1,5 @@
 const { Pool } = require('pg');
+require("dotenv").config({path:'./server/.env'});
 
 // Set your database credentials here
 const pool = new Pool({
