@@ -8,7 +8,9 @@ const pool = new Pool({
     database: process.env.DATABASE,
     password: process.env.PASSWORD,
     port: process.env.PORT_DB, 
-
+    ssl: {
+        rejectUnauthorized: false // Use this for development. For production, consider using certificates.
+    }
 });
 
 // Log any error during connection

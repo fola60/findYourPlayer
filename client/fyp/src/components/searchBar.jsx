@@ -18,7 +18,7 @@ export default function SearchBar(props){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("/allValue/search")
+                const response = await fetch("/api/allValue/search")
                 const result = await response.json();
                 const filter = result.filter((user) => {
                     return input.toLowerCase() && user && user.player && user.player.toLowerCase().includes(input.toLowerCase())

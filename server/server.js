@@ -21,7 +21,7 @@ app.use(express.json());
 
 //ROUTES//
 
-app.get("/allValue", async(req,res) => {
+app.get("/api/allValue", async(req,res) => {
     try{
         
         const getAll = await pool.query(`
@@ -36,13 +36,9 @@ app.get("/allValue", async(req,res) => {
     }
 });
 
-app.get("/test", async(req,res) => {
+app.get("/api/test", async(req,res) => {
     try{
-        
-        const getAll = await pool.query(`
-        SELECT 1;`);
-        
-        res.json(getAll)
+        res.json({'test':'work'})
     } catch (err) {
         console.error(err.message)
         res.status(500).json({ error: "Internal Server Error" });
@@ -50,7 +46,7 @@ app.get("/test", async(req,res) => {
 });
 
 
-app.get("/allValue/id/:id", async (req,res) => {
+app.get("/api/allValue/id/:id", async (req,res) => {
     const { id } = req.params;
     try {
         const player = await pool.query(`
@@ -67,7 +63,7 @@ app.get("/allValue/id/:id", async (req,res) => {
 
 //POSITION ROUTING//
 
-app.get("/allValue/pos/fw", async (req,res) => {
+app.get("/api/allValue/pos/fw", async (req,res) => {
     try {
         const playerPosFw = await pool.query(`
         SELECT *
@@ -81,7 +77,7 @@ app.get("/allValue/pos/fw", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/mf", async (req,res) => {
+app.get("/api/allValue/pos/mf", async (req,res) => {
     try {
         const playerPosMf = await pool.query(`
         SELECT *
@@ -95,7 +91,7 @@ app.get("/allValue/pos/mf", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/df", async (req,res) => {
+app.get("/api/allValue/pos/df", async (req,res) => {
     try {
         const playerPosDf = await pool.query(`
         SELECT *
@@ -114,7 +110,7 @@ app.get("/allValue/pos/df", async (req,res) => {
 
 //Prem
 
-app.get("/allValue/pos/fw/league/prem", async (req,res) => {
+app.get("/api/allValue/pos/fw/league/prem", async (req,res) => {
     try {
         const playerPosFwPl = await pool.query(`
         SELECT *
@@ -128,7 +124,7 @@ app.get("/allValue/pos/fw/league/prem", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/mf/league/prem", async (req,res) => {
+app.get("/api/allValue/pos/mf/league/prem", async (req,res) => {
     try {
         const playerPosMfPl = await pool.query(`
         SELECT *
@@ -142,7 +138,7 @@ app.get("/allValue/pos/mf/league/prem", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/df/league/prem", async (req,res) => {
+app.get("/api/allValue/pos/df/league/prem", async (req,res) => {
     try {
         const playerPosDfPl = await pool.query(`
         SELECT *
@@ -159,7 +155,7 @@ app.get("/allValue/pos/df/league/prem", async (req,res) => {
 
 //Bundesliga
 
-app.get("/allValue/pos/fw/league/bundesliga", async (req,res) => {
+app.get("/api/allValue/pos/fw/league/bundesliga", async (req,res) => {
     try {
         const playerPosFwBl = await pool.query(`
         SELECT *
@@ -173,7 +169,7 @@ app.get("/allValue/pos/fw/league/bundesliga", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/mf/league/bundesliga", async (req,res) => {
+app.get("/api/allValue/pos/mf/league/bundesliga", async (req,res) => {
     try {
         const playerPosMfBl = await pool.query(`
         SELECT *
@@ -187,7 +183,7 @@ app.get("/allValue/pos/mf/league/bundesliga", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/df/league/bundesliga", async (req,res) => {
+app.get("/api/allValue/pos/df/league/bundesliga", async (req,res) => {
     try {
         const playerPosDfPl = await pool.query(`
         SELECT *
@@ -204,7 +200,7 @@ app.get("/allValue/pos/df/league/bundesliga", async (req,res) => {
 
 //Ligue 1 
 
-app.get("/allValue/pos/fw/league/ligue1", async (req,res) => {
+app.get("/api/allValue/pos/fw/league/ligue1", async (req,res) => {
     try {
         const playerPosFwLg = await pool.query(`
         SELECT *
@@ -218,7 +214,7 @@ app.get("/allValue/pos/fw/league/ligue1", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/mf/league/ligue1", async (req,res) => {
+app.get("/api/allValue/pos/mf/league/ligue1", async (req,res) => {
     try {
         const playerPosMfLg = await pool.query(`
         SELECT *
@@ -232,7 +228,7 @@ app.get("/allValue/pos/mf/league/ligue1", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/df/league/ligue1", async (req,res) => {
+app.get("/api/allValue/pos/df/league/ligue1", async (req,res) => {
     try {
         const playerPosDfLg = await pool.query(`
         SELECT *
@@ -249,7 +245,7 @@ app.get("/allValue/pos/df/league/ligue1", async (req,res) => {
 
 //Serie A
 
-app.get("/allValue/pos/fw/league/seriea", async (req,res) => {
+app.get("/api/allValue/pos/fw/league/seriea", async (req,res) => {
     try {
         const playerPosFwSa = await pool.query(`
         SELECT *
@@ -263,7 +259,7 @@ app.get("/allValue/pos/fw/league/seriea", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/mf/league/seriea", async (req,res) => {
+app.get("/api/allValue/pos/mf/league/seriea", async (req,res) => {
     try {
         const playerPosMfSa = await pool.query(`
         SELECT *
@@ -277,7 +273,7 @@ app.get("/allValue/pos/mf/league/seriea", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/df/league/seriea", async (req,res) => {
+app.get("/api/allValue/pos/df/league/seriea", async (req,res) => {
     try {
         const playerPosDfSa = await pool.query(`
         SELECT *
@@ -293,7 +289,7 @@ app.get("/allValue/pos/df/league/seriea", async (req,res) => {
 
 //La Liga
 
-app.get("/allValue/pos/fw/league/laliga", async (req,res) => {
+app.get("/api/allValue/pos/fw/league/laliga", async (req,res) => {
     try {
         const playerPosFwLl = await pool.query(`
         SELECT *
@@ -307,7 +303,7 @@ app.get("/allValue/pos/fw/league/laliga", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/mf/league/laliga", async (req,res) => {
+app.get("/api/allValue/pos/mf/league/laliga", async (req,res) => {
     try {
         const playerPosMfLl = await pool.query(`
         SELECT *
@@ -321,7 +317,7 @@ app.get("/allValue/pos/mf/league/laliga", async (req,res) => {
     }
 });
 
-app.get("/allValue/pos/df/league/laliga", async (req,res) => {
+app.get("/api/allValue/pos/df/league/laliga", async (req,res) => {
     try {
         const playerPosDfLl = await pool.query(`
         SELECT *
@@ -335,7 +331,7 @@ app.get("/allValue/pos/df/league/laliga", async (req,res) => {
     }
 });
 
-app.get("/allValue/search", async (req,res) => {
+app.get("/api/allValue/search", async (req,res) => {
     try{
     const names = await pool.query(`
         SELECT player,id,pos,birthyear,comp
@@ -347,7 +343,7 @@ app.get("/allValue/search", async (req,res) => {
     }
 });
 
-app.post("/receiveId", async (req,res) => {
+app.post("/api/receiveId", async (req,res) => {
     try {
         const id = req.body.res;
         const pushId = await pool.query(`UPDATE dataid SET id = ${id};`)
@@ -356,7 +352,7 @@ app.post("/receiveId", async (req,res) => {
     }
 })
 
-app.get("/getId", async (req,res) => {
+app.get("/api/getId", async (req,res) => {
     try {
         const id = await pool.query(`SELECT id FROM dataid;`);
         res.json(id.rows)

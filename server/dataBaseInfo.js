@@ -9,7 +9,9 @@ const client = new Client({
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
   port: process.env.PORT_DB, 
-
+  ssl: {
+    rejectUnauthorized: false, // Set this to true if you have valid SSL certificates
+  }
 });
 
 

@@ -41,7 +41,7 @@ export default function PickStats(){
             console.log(`Pos: ${pos} league: ${league}`);
             const sendPlayerData = async () => {
                 try {
-                    const response = await fetch(`allValue/pos/${pos}/league/${league}`);
+                    const response = await fetch(`/api/allValue/pos/${pos}/league/${league}`);
                     const result = await response.json();
                     setPlayerList(result);
                     setGet(result);

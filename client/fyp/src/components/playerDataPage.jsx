@@ -15,7 +15,7 @@ export default function PlayerDataPage(){
     useEffect(() => {
         const getData = async () => {
             try {
-                const response = await fetch(`/allValue/id/${playerId}`)
+                const response = await fetch(`/api/allValue/id/${playerId}`)
                 const result = await response.json()
                 setData(result)
                 
