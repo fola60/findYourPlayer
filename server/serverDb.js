@@ -1,16 +1,9 @@
 const { Pool } = require('pg');
-require("dotenv").config({path:'./server/.env'});
+require("dotenv").config({path:'../server/.env'});
 
 // Set your database credentials here
 const pool = new Pool({
-    user: process.env.USER,
-    host: process.env.HOST,
-    database: process.env.DATABASE,
-    password: process.env.PASSWORD,
-    port: process.env.PORT_DB, 
-    ssl: {
-        rejectUnauthorized: false // Use this for development. For production, consider using certificates.
-    }
+    connectionString: process.env.DATABASE_URL,
 });
 
 // Log any error during connection
